@@ -13,7 +13,7 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 		url: '/login',
 		views: {
 			'container@': {
-				templateUrl: 'views/base.html',
+				templateUrl: 'views/partials/login.html',
 				controller: 'baseCtrl'
 			}
 		}
@@ -21,30 +21,42 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 	.state('root.app', {
 		url: '/',
 		views: {
-			'header': {
-				templateUrl: 'views/header.html',
-				controller: 'headerCtrl'
+			'header@': {
+				templateUrl: 'views/partials/header.html',
+				//controller: 'kanbanCtrl'
 			},
 			'container@': {
-				templateUrl: 'views/container.html',
-//				controller: 'baseCtrl'
+				templateUrl: 'views/partials/projects.html',
+				//controller: 'projectsCtrl'
 			}
 		}
 	})
 	.state('root.app.kanban', {
 		url : 'kanban',
-		templateUrl : 'views/kanban.html',
-		controller : 'kanbanCtrl'
+		views: {
+			'container@': {
+			templateUrl : 'views/partials/kanban.html',
+			controller: 'kanbanCtrl'
+			}
+		}
 	})
 	.state('root.app.gantter', {
 		url : 'gantter',
-		templateUrl : 'views/gantter.html',
-		controller : 'gantterCtrl'
+		views: {
+			'container@': {
+			templateUrl : 'views/partials/gantter.html',
+			controller: 'gantterCtrl'
+			}
+		}
 	})
 	.state('root.app.easybacklog', {
 		url : 'easybacklog',
-		templateUrl : 'views/easybacklog.html',
-		controller : 'easybacklogCtrl'
+		views: {
+			'container@': {
+			templateUrl : 'views/partials/easybacklog.html',
+			controller: 'easybacklogCtrl'
+			}
+		}
 	});
 	
 });
