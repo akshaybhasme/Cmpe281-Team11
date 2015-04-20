@@ -3,32 +3,42 @@ var cmpe = angular.module('cmpe', ['ui.router', 'ui.bootstrap']);
 cmpe.config(function($stateProvider, $urlRouterProvider){
 
 	$urlRouterProvider.otherwise("/");
-
+	
 	$stateProvider
 		.state('root',{
-			url: '',
+			url: '/',
 			abstract: true,
 			views: {
 				'header': {
-					templateUrl: 'views/header.html',
+					templateUrl: 'views/partials/header.html',
 					controller: 'headerCtrl'
 				}
 			}
 		})
 		.state('root.kanban', {
-			url: '/',
+			url: '/kanban',
 			views: {
 				'container@': {
-					templateUrl: 'views/kanban.html',
+					templateUrl: 'views/partials/kanban.html',
 					controller: 'baseCtrl'
 				}
 			}
 		})
 		.state('root.easyBacklog', {
-			url: '/',
+			url: '/easyBacklog',
 			views: {
 				'container@': {
-					templateUrl: 'views/easyBacklog.html',
+					templateUrl: 'views/partials/easyBacklog.html',
+					controller: 'baseCtrl'
+				}
+			}
+		})
+		
+		.state('root.gantter', {
+			url: '/gantter',
+			views: {
+				'container@': {
+					templateUrl: 'views/partials/gantter.html',
 					controller: 'baseCtrl'
 				}
 			}
