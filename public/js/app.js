@@ -5,58 +5,46 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise("/");
 	
 	$stateProvider
-		.state('root',{
-			url: '/',
-			abstract: true,
-			views: {
-				'header': {
-					templateUrl: 'views/partials/header.html',
-					controller: 'headerCtrl'
-				}
+	.state('root',{
+		url: '',
+		abstract: true,
+	})
+	.state('root.login', {
+		url: '/login',
+		views: {
+			'container@': {
+				templateUrl: 'views/base.html',
+				controller: 'baseCtrl'
 			}
-		})
-		.state('root.kanban', {
-			url: '/kanban',
-			views: {
-				'container@': {
-					templateUrl: 'views/partials/kanban.html',
-					controller: 'baseCtrl'
-				}
+		}
+	})
+	.state('root.app', {
+		url: '/',
+		views: {
+			'header': {
+				templateUrl: 'views/header.html',
+				controller: 'headerCtrl'
+			},
+			'container@': {
+				templateUrl: 'views/container.html',
+//				controller: 'baseCtrl'
 			}
-		})
-		.state('root.easyBacklog', {
-			url: '/easyBacklog',
-			views: {
-				'container@': {
-					templateUrl: 'views/partials/easyBacklog.html',
-					controller: 'baseCtrl'
-				}
-			}
-		})
-		
-		.state('root.gantter', {
-			url: '/gantter',
-			views: {
-				'container@': {
-					templateUrl: 'views/partials/gantter.html',
-					controller: 'baseCtrl'
-				}
-			}
-		})
-		
-		.state('root.base.search', {
-			url: 'search/:lat/:lng/:universityName',
-			templateUrl : 'views/search.html',
-			controller : 'searchCtrl'
-		})
-		.state('root.base.apartment', {
-			url: 'apartment/:placeID/:uniLat/:uniLong',
-			templateUrl : 'views/apartment.html',
-			controller : 'apartmentCtrl'
-		})
-		.state('root.base.team', {
-			url: 'aboutus',
-			templateUrl : 'views/team.html'
-		});
+		}
+	})
+	.state('root.app.kanban', {
+		url : 'kanban',
+		templateUrl : 'views/kanban.html',
+		controller : 'kanbanCtrl'
+	})
+	.state('root.app.gantter', {
+		url : 'gantter',
+		templateUrl : 'views/gantter.html',
+		controller : 'gantterCtrl'
+	})
+	.state('root.app.easybacklog', {
+		url : 'easybacklog',
+		templateUrl : 'views/easybacklog.html',
+		controller : 'easybacklogCtrl'
+	});
 	
 });
