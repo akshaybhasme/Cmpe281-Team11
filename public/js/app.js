@@ -15,15 +15,25 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 				}
 			}
 		})
-		.state('root.base', {
+		.state('root.kanban', {
 			url: '/',
 			views: {
 				'container@': {
-					templateUrl: 'views/base.html',
+					templateUrl: 'views/kanban.html',
 					controller: 'baseCtrl'
 				}
 			}
 		})
+		.state('root.easyBacklog', {
+			url: '/',
+			views: {
+				'container@': {
+					templateUrl: 'views/easyBacklog.html',
+					controller: 'baseCtrl'
+				}
+			}
+		})
+		
 		.state('root.base.search', {
 			url: 'search/:lat/:lng/:universityName',
 			templateUrl : 'views/search.html',
