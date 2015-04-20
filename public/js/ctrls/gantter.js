@@ -1,12 +1,12 @@
-angular.module('ui.bootstrap.demo').controller('ModalDemoCtrl', function ($scope, $modal, $log) {
+cmpe.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
 
   $scope.items = ['item1', 'item2', 'item3'];
 
   $scope.open = function (size) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
+      templateUrl: 'views/modals/task.html',
+      controller: 'ModalDemoCtrl',
       size: size,
       resolve: {
         items: function () {
@@ -25,8 +25,8 @@ angular.module('ui.bootstrap.demo').controller('ModalDemoCtrl', function ($scope
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
-
-angular.module('ui.bootstrap.demo').controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+/*
+angular.module('cmpe').controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
 
   $scope.items = items;
   $scope.selected = {
@@ -40,4 +40,4 @@ angular.module('ui.bootstrap.demo').controller('ModalInstanceCtrl', function ($s
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
-});
+});*/

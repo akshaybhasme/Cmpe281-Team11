@@ -6,7 +6,7 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 	
 	$stateProvider
 		.state('root',{
-			url: '/',
+			url: '',
 			abstract: true,
 			views: {
 				'header': {
@@ -15,8 +15,9 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 				}
 			}
 		})
+		/*
 		.state('root.kanban', {
-			url: '/kanban',
+			url: '/',
 			views: {
 				'container@': {
 					templateUrl: 'views/partials/kanban.html',
@@ -33,17 +34,17 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 				}
 			}
 		})
-		
+		*/
 		.state('root.gantter', {
-			url: '/gantter',
+			url: '/',
 			views: {
 				'container@': {
 					templateUrl: 'views/partials/gantter.html',
-					controller: 'baseCtrl'
+					controller: 'ModalDemoCtrl'
 				}
 			}
-		})
-		
+		});
+		/*
 		.state('root.base.search', {
 			url: 'search/:lat/:lng/:universityName',
 			templateUrl : 'views/search.html',
@@ -57,6 +58,6 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 		.state('root.base.team', {
 			url: 'aboutus',
 			templateUrl : 'views/team.html'
-		});
+		});*/
 	
 });
