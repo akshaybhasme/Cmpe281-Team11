@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<div ng-controller="ModalDemoCtrl">
+    <script type="text/ng-template" id="task.html">
+       
+    </script>
 
-</body>
-</html>
+    <button class="btn btn-default" ng-click="open()">Open me!</button>
+    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
+    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+</div>
