@@ -1,0 +1,56 @@
+@CHARSET "US-ASCII";
+
+a:hover{
+	text-decoration: none;
+}
+.angular-google-map-container { 
+	margin-top: 50px; 
+}
+
+.separator{
+	height: 10px;
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+.apt-list-item{
+	padding-bottom: 15px;
+	padding-top: 5px;
+}
+
+.apt-list-item:hover{
+	background: rgba(211, 211, 211, 0.8);
+}
+
+
+.footer{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+}
+
+.map-floater{
+	z-index: 1029;
+	margin-top: 500px;
+}
+
+.ws-form{
+	display: none;
+}
+
+.innerAll{
+	padding: 20px;
+}
+
+@media ( max-width : 767px) {
+	.map-floater{
+		z-index: 1029;
+		margin-top: 250px;
+	}
+	
+	.mobile-hidden{
+		display: none;
+	}
+}
