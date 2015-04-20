@@ -1,10 +1,46 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html data-ng-app="cmpe">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="US-ASCII">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>CMPE 281 - Team 11</title>
+	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="css/bootstrap-paper.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 
+	<div data-ui-view="header"></div>
+	
+	<div data-ui-view="container"></div>
+
+
+	<footer class="footer">
+		<div class="container" style="background-color: rgba(245, 245, 245, 0.9);">
+			<div class="text-center">CMPE 272 by Team 4. | Privacy Policy | <a data-ui-sref="root.base.team">About Us</a></div>
+		</div>
+	</footer>
 </body>
+
+<!-- List Plugins -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+<script src="js/plugins/lodash.js"></script>
+<script src="js/plugins/angular-google-maps.min.js"></script>
+<script src="js/plugins/angular-ui-router.js"></script>
+<script src="js/plugins/ui-bootstrap-tpls-0.12.0.js"></script>
+
+<!-- Config -->
+<script src="js/app.js"></script>
+
+<!-- List Directives -->
+
+
+<!-- List Controllers -->
+<script src="js/ctrls/easyBacklog.js"></script>
+<script src="js/ctrls/gantter.js"></script>
+<script src="js/ctrls/kanban.js"></script>
+
 </html>
