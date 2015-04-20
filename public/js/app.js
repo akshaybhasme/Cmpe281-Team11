@@ -13,7 +13,7 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 		url: '/login',
 		views: {
 			'container@': {
-				templateUrl: 'views/base.html',
+				templateUrl: 'views/partials/base.html',
 				controller: 'baseCtrl'
 			}
 		}
@@ -22,28 +22,28 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 		url: '/',
 		views: {
 			'header': {
-				templateUrl: 'views/header.html',
+				templateUrl: 'views/partials/header.html',
 				controller: 'headerCtrl'
 			},
 			'container@': {
-				templateUrl: 'views/container.html',
+				templateUrl: 'views/partials/container.html',
 //				controller: 'baseCtrl'
 			}
 		}
 	})
 	.state('root.app.kanban', {
 		url : 'kanban',
-		templateUrl : 'views/kanban.html',
+		templateUrl : 'views/partials/kanban.html',
 		controller : 'kanbanCtrl'
 	})
 	.state('root.app.gantter', {
 		url : 'gantter',
-		templateUrl : 'views/gantter.html',
+		templateUrl : 'views/partials/gantter.html',
 		controller : 'gantterCtrl'
 	})
 	.state('root.app.easybacklog', {
 		url : 'easybacklog',
-		templateUrl : 'views/easybacklog.html',
+		templateUrl : 'views/partials/easybacklog.html',
 		controller : 'easybacklogCtrl'
 	});
 	
