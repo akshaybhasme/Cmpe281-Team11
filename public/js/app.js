@@ -45,7 +45,7 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 		views: {
 			'container@': {
 			templateUrl : 'views/partials/gantter.html',
-			controller: 'ModalDemoCtrl'
+			controller: 'gantterCtrl'
 			}
 		}
 	})
