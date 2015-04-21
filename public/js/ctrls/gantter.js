@@ -41,8 +41,8 @@ angular.module('cmpe').controller('ModalInstanceCtrl', function ($scope, $modalI
   $scope.ok = function () {
 	  
 	  var a={
-			  task:$scope.arr.textarea,
-				date:$scope.arr.dt,
+			  task:$scope.arr.task,
+				date:$scope.arr.date,
 				duration:$scope.arr.duration
 			  
 	  };
