@@ -24,6 +24,10 @@ a:hover{
 	background: rgba(211, 211, 211, 0.8);
 }
 
+div:#text {
+	border:thick;
+	border-style: solid;
+}
 
 .footer{
 	width: 100%;

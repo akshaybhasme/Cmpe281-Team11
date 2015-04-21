@@ -4,10 +4,15 @@
     <script type="text/ng-template" id="task.html">
        
     </script>
-
-    <button class="btn btn-default" ng-click="open()">Open me!</button>
-    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
+	
+	<div>
+	<b>Tasks</b>
+    <button class="btn btn-success btn-sm" ng-click="open()">
+    	<span class="glyphicon glyphicon-plus" aria-expanded="false"></span>
+    </button>
+    </div>
+   <!-- <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
+    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>-->
     <div ng-show="selected">Selection from a modal: {{ selected }}</div>
 </div>
 <div>asdasdsa</div>
