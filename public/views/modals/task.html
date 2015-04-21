@@ -4,14 +4,14 @@
  <div class="modal-body">
   
      Task Description:<br>
-     <textarea ng-model="textarea" id="text" rows="3" cols="40" name="task" style="border: thin;border-style:solid;">Enter text here...</textarea>
+     <textarea ng-model="arr.textarea" id="text" rows="3" cols="40" name="task" style="border: thin;border-style:solid;">Enter text here...</textarea>
      <br/>
-      Date:<pre>Selected date is: <em>{{dt | date:'fullDate'}}</em></pre>
+      Date:<pre>Selected date is: <em>{{arr.dt | date:'fullDate' }}</em></pre>
 	    <div style="display:inline-block; min-height:290px;">
-	        <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+	        <datepicker ng-model="arr.dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
 	    </div>
 	 <br/>
-	 Duration:<input ng-model="duration" type="text" name="duration"></input>
+	 Duration:<input ng-model="arr.duration" type="text" name="duration"></input>
  </div>
  <div class="modal-footer">
      <button class="btn btn-primary" ng-click="ok()">Save</button>
