@@ -1,16 +1,17 @@
-cmpe.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
+cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
 
   $scope.items = ['item1', 'item2', 'item3'];
-  $scope.arrs=[{
+  /*$scope.arrs=[{
 		task:'task1',
 		date:'10/01/2012',
 		duration:'12'
-	}];
+	}];*/
+  $scope.arrs=[];
   $scope.open = function (size) {
 
     var modalInstance = $modal.open({
       templateUrl: 'views/modals/task.html',
-      controller: 'ModalInstanceCtrl',
+      controller: 'modalGantterCtrl',
       size: size,
       resolve: {
         items: function () {
@@ -31,7 +32,7 @@ cmpe.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('cmpe').controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalInstance, items) {
 	
   $scope.items = items;
   $scope.selected = {

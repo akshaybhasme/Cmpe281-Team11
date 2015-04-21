@@ -1,20 +1,22 @@
 
-<div ng-controller="ModalDemoCtrl">
+<div ng-controller="gantterCtrl">
 
-    <script type="text/ng-template" id="task.html">
-       
-    </script>
 	
-	<div>
+<div class="col-xs-4 btn btn-sm btn-info" style="text-align: center;">
 	<b>Tasks</b>
-    <button class="btn btn-success btn-sm" ng-click="open()">
-    	<span class="glyphicon glyphicon-plus" aria-expanded="false"></span>
-    </button>
-    </div>
-   <!-- <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>-->
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
-    <div ng-repeat="arr in arrs">
-    {{arr.date}} {{arr.task}}
-    </div>
+   &nbsp;&nbsp;<button class="btn btn-primary btn-xs" style="width:1;height:1;position:fixed;" ng-click="open()">
+   	<span class="glyphicon glyphicon-plus" aria-expanded="false"></span>
+   </button>
+</div>
+<div class="col-xs-8 btn btn-sm btn-info" style="text-align: center;">
+	<b>Progress</b>
+</div>
+
+<div class="col-xs-4" style="text-align: center;">
+		 <div ng-repeat="arr in arrs">
+		 {{arr.date}} {{arr.task}}
+		 </div>
+</div>
+    
+    
 </div>
