@@ -1,22 +1,24 @@
 
-<div ng-controller="gantterCtrl">
+<div data-ng-controller="gantterCtrl">
 
 	
-<div class="col-xs-4 btn btn-sm btn-info" style="text-align: center;">
-	<b>Tasks</b>
-   &nbsp;&nbsp;<button class="btn btn-primary btn-xs" style="width:1;height:1;position:fixed;" ng-click="open()">
-   	<span class="glyphicon glyphicon-plus" aria-expanded="false"></span>
-   </button>
-</div>
-<div class="col-xs-8 btn btn-sm btn-info" style="text-align: center;">
-	<b>Progress</b>
-</div>
-
-<div class="col-xs-4" style="text-align: center;">
-		 <div ng-repeat="arr in arrs">
-		 {{arr.date}} {{arr.task}}
-		 </div>
-</div>
+		<div class="col-xs-4 btn btn-sm btn-info" style="text-align: center;">
+			<b>Tasks</b>
+		   &nbsp;&nbsp;<button class="btn btn-primary btn-xs" style="width:1;height:1;position:fixed;" ng-click="open()">
+		   	<span class="glyphicon glyphicon-plus" aria-expanded="false"></span>
+		   </button>
+		</div>
+		<div class="col-xs-8 btn btn-sm btn-info" style="text-align: center;">
+			<b>Progress</b>
+		</div>
+		<div class="col-xs-4" style="text-align: center;">
+			<table class="table table-hover table-striped">	
+				<tr class="success" data-ng-repeat="arr in arrs">
+				 <td>{{arr.date}} {{arr.task}}</td>
+				</tr>
+			</table>
+		</div>
+	
     
     
 </div>
