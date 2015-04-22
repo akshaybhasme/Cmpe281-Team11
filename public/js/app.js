@@ -1,4 +1,4 @@
-var cmpe = angular.module('cmpe', ['ui.router', 'ui.bootstrap']);
+var cmpe = angular.module('cmpe', ['ui.router', 'ui.bootstrap', 'ngDragDrop']);
 
 cmpe.config(function($stateProvider, $urlRouterProvider){
 
