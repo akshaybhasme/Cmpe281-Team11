@@ -905,6 +905,14 @@ body {
   color: #666666;
   background-color: #ffffff;
 }
+.sample {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  line-height: 1.846;
+  color: #666666;
+  background-color: #ffffff;
+  text-align: left;
+}
 input,
 button,
 select,

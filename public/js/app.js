@@ -53,7 +53,7 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 		url : 'easybacklog',
 		views: {
 			'container@': {
-			templateUrl : 'views/partials/easybacklog.html',
+			templateUrl : 'views/partials/easyBacklog.html',
 			controller: 'easybacklogCtrl'
 			}
 		}
