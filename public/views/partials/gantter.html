@@ -1,24 +1,103 @@
 
 <div data-ng-controller="gantterCtrl">
+	<div class="col-xs-2 btn btn-sm btn-info" style="text-align: center;">
+		<b>Tasks</b> &nbsp;&nbsp;
+		<button class="btn btn-primary btn-xs"
+			style="width: 1; height: 1; position: fixed;" data-ng-click="open()">
+			<span class="glyphicon glyphicon-plus" aria-expanded="false"></span>
+		</button>
+	</div>
+	<div class="col-xs-1 btn btn-sm btn-info" style="text-align: center;">
+		<b>Date</b>
+	</div>
+	<div class="col-xs-1 btn btn-sm btn-info" style="text-align: center;">
+		<b>Duration</b>
+	</div>
+	<div class="col-xs-8 btn btn-sm btn-info" style="text-align: center;">
+		<div class="col-xs-1"
+			data-ng-repeat="data in datepush track by $index">
+			<b>{{data|date:'dd-MM-yyyy'}}</b>
+		</div>
+	</div>
+	<div class="col-xs-12" data-ng-repeat="arr in arrs track by $index">
+			<div data-ng-if="arr.subtask=='No'">
+				<div class="col-xs-2" style="text-align: center;">
+					<table class="col-xs-2 table table-hover">
+						<tr class="active">
+							<td>{{arr.task}}</td>
+						</tr>
+					</table>
+					<!--  <div class="col-xs-12 btn btn-sm btn-info" data-ng-repeat="arr in arrs track by $index">
+						{{arr.task}}-->
 
-	
-		<div class="col-xs-4 btn btn-sm btn-info" style="text-align: center;">
-			<b>Tasks</b>
-		   &nbsp;&nbsp;<button class="btn btn-primary btn-xs" style="width:1;height:1;position:fixed;" ng-click="open()">
-		   	<span class="glyphicon glyphicon-plus" aria-expanded="false"></span>
-		   </button>
+				</div>
+				<div class="col-xs-1" style="text-align: center;">
+					<table class="col-xs-12 table table-hover">
+						<tr class="active">
+							<td>{{arr.date}}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-xs-1" style="text-align: center;">
+					<table class="col-xs-1 table table-hover">
+						<tr class="active">
+							<td>{{arr.duration}}</td>
+						</tr>
+					</table>
+				</div>
+			<div class="col-xs-8">
+				<div class="col-xs-{{arr.duration}}" style="text-align: center;">
+					<br />
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" aria-valuenow="60"
+							aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+							<span class="sr-only">60% Complete</span>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-xs-8 btn btn-sm btn-info" style="text-align: center;">
-			<b>Progress</b>
+
+		<div data-ng-if="arr.subtask=='Yes'">
+			<div class="col-xs-2" style="text-align: center;">
+				<table class="col-xs-2 table table-hover">
+					<tr class="warning">
+						<td>{{arr.task}}</td>
+					</tr>
+				</table>
+				<!--  <div class="col-xs-12 btn btn-sm btn-info" data-ng-repeat="arr in arrs track by $index">
+						{{arr.task}}-->
+
+			</div>
+			<div class="col-xs-1" style="text-align: center;">
+				<table class="col-xs-12 table table-hover">
+					<tr class="warning">
+						<td>{{arr.date}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-xs-1" style="text-align: center;">
+				<table class="col-xs-1 table table-hover">
+					<tr class="warning">
+						<td>{{arr.duration}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-xs-8">
+				<div class="col-xs-{{arr.duration}}" style="text-align: center;">
+					<br />
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" aria-valuenow="60"
+							aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+							<span class="sr-only">60% Complete</span>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-xs-4" style="text-align: center;">
-			<table class="table table-hover table-striped">	
-				<tr class="success" data-ng-repeat="arr in arrs">
-				 <td>{{arr.date}} {{arr.task}}</td>
-				</tr>
-			</table>
-		</div>
-	
-    
-    
+	</div>
 </div>
+
+
+
+

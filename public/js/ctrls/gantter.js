@@ -6,6 +6,21 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
 		date:'10/01/2012',
 		duration:'12'
 	}];*/
+   $scope.datepush=[];
+   //var dateobj=;
+   $scope.datepush.push(new Date());
+   var extDate=new Date();
+   //$scope.datepush.push(new Date().getDate()+"-"+new Date().getMonth())
+	  for(var i=1;i<12;i++){
+		  //$scope.getDatetime = (dateobj+i);		  
+		  $scope.datepush.push(extDate.setDate(extDate.getDate()+1));
+		  //console.log(extDate.setDate(extDate.getDate()+1));
+		  
+	  }
+	  console.log($scope.datepush);
+	 // console.log(new Date());
+	  ///$scope.dateobj=null;
+  //console.log($scope.getDatetime);
   $scope.arrs=[];
   $scope.open = function (size) {
 
@@ -23,10 +38,15 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
     modalInstance.result.then(function (selectedItem) {
       //$scope.selected = selectedItem;
     	$scope.arrs.push(selectedItem);
+    	console.log($scope.arrs);
+    	///$scope.arrs.push($scope.currDate);
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
+   
   };
+  
+ 
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
@@ -38,15 +58,29 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
   $scope.selected = {
     item: $scope.items[0]
   };
+  
+  $scope.arr={
+		  ct:"Yes"
+  }
+  $scope.subtask=["Yes","No"];
 
   $scope.ok = function () {
 	  
+	  var dt=$scope.arr.date;
+	  var year=dt.getFullYear()+"";
+	  var month=(dt.getMonth()+1)+"";
+	  var day=dt.getDate()+"";
+	  var datenow=month+"-"+day+"-"+year;
+	  //var subtask=[];
+	  console.log($scope.arr.ct);
+
 	  var a={
 			  task:$scope.arr.task,
-				date:$scope.arr.date,
-				duration:$scope.arr.duration
-			  
+			  date:datenow,
+			  duration:$scope.arr.duration,
+			  subtask:$scope.arr.ct
 	  };
+
 	  $modalInstance.close(a);
 	  
   };
