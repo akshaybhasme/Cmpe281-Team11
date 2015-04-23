@@ -11,7 +11,7 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
    $scope.datepush.push(new Date());
    var extDate=new Date();
    //$scope.datepush.push(new Date().getDate()+"-"+new Date().getMonth())
-	  for(var i=1;i<9;i++){
+	  for(var i=1;i<12;i++){
 		  //$scope.getDatetime = (dateobj+i);		  
 		  $scope.datepush.push(extDate.setDate(extDate.getDate()+1));
 		  //console.log(extDate.setDate(extDate.getDate()+1));
@@ -43,7 +43,10 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
+   
   };
+  
+ 
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
