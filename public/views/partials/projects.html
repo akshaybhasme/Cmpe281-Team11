@@ -1,6 +1,37 @@
-<div data-ui-sref="root.app.kanban" style="font-size: 20px">kanban
-</div>
-<div data-ui-sref="root.app.easyBackog" style="font-size: 20px">easyBackog
-</div>
-<div data-ui-sref="root.app.gantter" style="font-size: 20px">gantter
+<div>{{title}}</div>
+<div ng-repeat="item in list1">
+	<div data-ui-sref="root.app.kanban" data-ng-if="item.type=='Kanban'">
+		<div class="col-xs-2">
+			<b>Type: </b><span>{{item.type}}</span>
+		</div>
+		<div class="col-xs-2">
+			<div>
+				<b>Title: </b> <span>{{item.title}}</span>
+			</div>
+		</div>
+		<br/> 
+	</div>
+	<div data-ui-sref="root.app.easyBackog"
+		data-ng-if="item.type=='EasyBackog'">
+		<div class="col-xs-2">
+			<b>Type: </b><span>{{item.type}}</span>
+		</div>
+		<div class="col-xs-2">
+			<div>
+				<b>Title: </b> <span>{{item.title}}</span>
+			</div>
+		</div>
+		<br/> 
+	</div>
+	<div data-ui-sref="root.app.gantter" data-ng-if="item.type=='Gantter'">
+		<div class="col-xs-2">
+			<b>Type: </b><span>{{item.type}}</span>
+		</div>
+		<div class="col-xs-2">
+			<div>
+				<b>Title: </b> <span>{{item.title}}</span>
+			</div>
+		</div>
+		<br/> 
+	</div>
 </div>

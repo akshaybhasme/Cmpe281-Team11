@@ -27,7 +27,7 @@ cmpe.config(function($stateProvider, $urlRouterProvider){
 			},
 			'container@': {
 				templateUrl: 'views/partials/projects.html',
-				//controller: 'projectsCtrl'
+				controller: 'projectsCtrl'
 			}
 		}
 	})
