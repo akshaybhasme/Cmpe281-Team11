@@ -12,6 +12,15 @@
 	    </div>
 	 <br/>
 	 Duration:<input ng-model="arr.duration" type="text" name="duration"></input>
+	 Subtask:
+	  <div class="btn-group" dropdown>	     
+	      	<select type="button" class="btn btn-info dropdown-toggle" dropdown-toggle data-ng-model="arr.ct" data-ng-options="task for task in subtask">
+	      	</select>
+	        <span class="caret"></span>
+	        <span class="sr-only">Split button!</span>	      
+	      <div class="dropdown-menu" role="menu">	      	
+	      </div>
+      </div>
  </div>
  <div class="modal-footer">
      <button class="btn btn-primary" ng-click="ok()">Save</button>
