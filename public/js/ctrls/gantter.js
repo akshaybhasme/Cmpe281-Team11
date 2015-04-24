@@ -8,6 +8,7 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
 	}];*/
    $scope.datepush=[];
    //var dateobj=;
+   
    $scope.datepush.push(new Date());
    var extDate=new Date();
    //$scope.datepush.push(new Date().getDate()+"-"+new Date().getMonth())
@@ -35,20 +36,40 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
         }
       }
     });
+    
     var add=0;
     modalInstance.result.then(function (selectedItem) {
       //$scope.selected = selectedItem;
     	$scope.arrs.push(selectedItem);
-    	for(i=0;i<$scope.arrs.length;i++){
-    		
+    	$scope.checkdatediff=[];
+    	function dateDiffInDays(a,b){
+    	var Date1 = a;
+    	var Date2= b;
+
+    	var timestamp1 = new Date(Date1).getTime();
+    	var timestamp2 = new Date(Date2).getTime();
+
+    	var diff = (Math.abs(timestamp1 - timestamp2) / 3600000)/24;
+    	return Math.ceil(diff);
+    	}
+    	
+    	
+		
+    	//var newDate = new Date (diff);
+    	
+    	for(var i=0;i<$scope.arrs.length;i++){
+    		 
+    		console.log($scope.datediff);
     		if($scope.arrs[i].subtask=="No")
     			{
     				$scope.taskindex=i;
     				add=0;
+    				//$scope.datedifftask=dateDiffInDays(new Date(), $scope.arrs[i].date);
     			}
     		//add=$scope.arrs[i].duration;
     		if($scope.arrs[i].subtask=="Yes")
     			{  
+    			//$scope.datediffsubtask=dateDiffInDays(new Date(), $scope.arrs[i].date);
     			add=(add+parseInt($scope.arrs[i].duration));
     			if(parseInt($scope.arrs[$scope.taskindex].duration)<add){
     			$scope.arrs[$scope.taskindex].duration=add;
@@ -102,9 +123,20 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
 			  task:$scope.arr.task,
 			  date:datenow,
 			  duration:$scope.arr.duration,
-			  subtask:$scope.arr.ct
+			  subtask:$scope.arr.ct,
+			  datediff: dateDiffInDays(new Date(), datenow)
 	  };
-	 
+	  
+	  function dateDiffInDays(a,b){
+	    	var Date1 = a;
+	    	var Date2= b;
+
+	    	var timestamp1 = new Date(Date1).getTime();
+	    	var timestamp2 = new Date(Date2).getTime();
+
+	    	var diff = (Math.abs(timestamp1 - timestamp2) / 3600000)/24;
+	    	return Math.ceil(diff);
+	    	}
 	  //console.log($scope.arr.dataDate);
 	  $modalInstance.close(a);
 	  
