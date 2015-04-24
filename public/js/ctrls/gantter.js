@@ -53,33 +53,40 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
     	return Math.ceil(diff);
     	}
     	
+    	function max(a,b){
+        	return a>b?a:b;
+        	}
+    	
     	
 		
     	//var newDate = new Date (diff);
-    	
+    	var startdate;
     	for(var i=0;i<$scope.arrs.length;i++){
-    		 
-    		console.log($scope.datediff);
+    		
     		if($scope.arrs[i].subtask=="No")
     			{
     				$scope.taskindex=i;
     				add=0;
+    				startdate=$scope.arrs[i].date;
     				//$scope.datedifftask=dateDiffInDays(new Date(), $scope.arrs[i].date);
     			}
     		//add=$scope.arrs[i].duration;
     		if($scope.arrs[i].subtask=="Yes")
     			{  
+    			var enddate=$scope.arrs[i].date;
+    			var diff=dateDiffInDays(enddate,startdate);
+    			add=max(diff+parseInt($scope.arrs[i].duration),add);
     			//$scope.datediffsubtask=dateDiffInDays(new Date(), $scope.arrs[i].date);
-    			add=(add+parseInt($scope.arrs[i].duration));
+    			//add=(add+parseInt($scope.arrs[i].duration));
     			if(parseInt($scope.arrs[$scope.taskindex].duration)<add){
-    			$scope.arrs[$scope.taskindex].duration=add;
+    				$scope.arrs[$scope.taskindex].duration=add;
     			}
     			else
     			{
     				//add=(add+parseInt($scope.arrs[i].duration));
     				console.log(add);
     			}
-    			}
+    		}
     		
     		
     	}
@@ -116,7 +123,7 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
 	  var month=(dt.getMonth()+1)+"";
 	  var day=dt.getDate()+"";
 	  var datenow=month+"-"+day+"-"+year;
-	  //var subtask=[];
+	 
 	  console.log($scope.arr.ct);
 	
 	  var a={
@@ -137,7 +144,7 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
 	    	var diff = (Math.abs(timestamp1 - timestamp2) / 3600000)/24;
 	    	return Math.ceil(diff);
 	    	}
-	  //console.log($scope.arr.dataDate);
+	 
 	  $modalInstance.close(a);
 	  
   };
