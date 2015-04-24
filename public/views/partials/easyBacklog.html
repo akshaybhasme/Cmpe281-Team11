@@ -46,30 +46,104 @@
 				data-jqyoui-options="{revert: 'invalid'}" ng-model="theme1"
 				jqyoui-draggable="{index: {{$index}},animate:true}">
 				<div class="col-xs-1">
-					<b>{{item.theme}}</b>
+					<b><input class="col-xs-1" style="width: 76px; font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.theme}}"></b>
+					<div class="col-xs-1">
+					<a title="Delete theme" style="color: #000;"
+						data-ng-click="deleteTheme1(item)" class="pointer">&#10006;</a>
 				</div>
-				<!--  <div class="col-xs-1">
-					<a title="Delete listing" style="color: #000;"
-						data-ng-click="deleteListing1(item)" class="pointer">&#10006;</a>
-				</div>-->
+				</div>
 				<div class="col-xs-1">
-					<b>{{item.id}}</b>
+					<b><input class="col-xs-1" style="width: 34px;font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.id}}"></b></br>
+					<div class="col-xs-1">
+					<a title="Delete story" style="color: #000;"
+						data-ng-click="deleteStory()" class="pointer">&#10006;</a>
+				</div>
 				</div>
 
 				<div class="col-xs-3" style="text-align:left">
 						<ul style="list-style: none;">
 							<li>As <b><input style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.userstoryln1}}"></b></li>
-							<li><span>I want to </span><span><b><textarea class="form-control" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" id="txtAreaIWantTo">{{item.userstoryln2}}</textarea></b></span></li>
-							<li><span>So I can </span><span><b><textarea class="form-control" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" id="txtAreaSoICan">{{item.userstoryln3}}</textarea></b></span></li>
+							<li><span style="float: left;"> I want to </span>&nbsp;&nbsp;<span><b><textarea class="custtextarea" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" id="txtAreaIWantTo">{{item.userstoryln2}}</textarea></b></span></li>
+							<li><span style="float: left;"> So I can </span>&nbsp;&nbsp;<span><b><textarea class="custtextarea" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" id="txtAreaSoICan">{{item.userstoryln3}}</textarea></b></span></li>
 						</ul>
 				</div>
 				
-				<div class="col-xs-3" style="text-align:left">
-					<div id="divcriteria" ng-repeat="criteria in item.criteria">
-						<b><textarea id="txtAreaCriteria" class="form-control" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;width: 280px;" id="txtIWantTo">{{criteria}}</textarea></b>
+				<div class="col-xs-2" style="text-align:left">
+					<div ng-repeat="criteria in item.criteria">
+						<b><textarea class="custtextarea" id="txtAreaCriteria" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" id="txtCriteria">{{criteria}}</textarea></b>
 					</div>
+				</div>
+				 <div class="col-xs-2" style="text-align:centre">
+					<b><textarea id="txtComments" class="custtextarea" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" id="txtComments">{{item.comments}}</textarea></b>
+				</div> 
+				
+				<div class="col-xs-1" style="text-align:centre">
+					<b><input class="col-xs-1" style=" float:right; width: 34px;font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.points}}"></b>
+				</div>
+				<div class="col-xs-1" style="text-align:centre">
+					<b><input class="col-xs-1" style=" float:right; width: 34px;font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.cost}}"></b>
+				</div>
+				<div class="col-xs-1" style="text-align:centre">
+					<b><input class="col-xs-1" style=" float:right; width: 34px;font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.days}}"></b>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<div class="col-xs-12">
+	<div class="thumbnail" data-drop="true" ng-model='theme2'
+		data-jqyoui-options="{accept:'.btn-draggable:not([ng-model=theme2])'}"
+		jqyoui-droppable="{multiple:true}">
+		<div>
+			<div class="btn btn-default btn-draggable col-xs-12"
+				style="margin-top: 10px;" ng-repeat="item in theme2"
+				ng-show="item.theme" data-drag="{{item.drag}}"
+				data-jqyoui-options="{revert: 'invalid'}" ng-model="theme2"
+				jqyoui-draggable="{index: {{$index}},animate:true}">
+				<div class="col-xs-1">
+					<b><input class="col-xs-1" style="width: 76px; font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.theme}}"></b>
+					<div class="col-xs-1">
+					<a title="Delete theme" style="color: #000;"
+						data-ng-click="deleteTheme2(item)" class="pointer">&#10006;</a>
+				</div>
+				</div>
+				<div class="col-xs-1">
+					<b><input class="col-xs-1" style="width: 34px;font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.id}}"></b></br>
+					<div class="col-xs-1">
+					<a title="Delete story" style="color: #000;"
+						data-ng-click="deleteStory()" class="pointer">&#10006;</a>
+				</div>
+				</div>
+
+				<div class="col-xs-3" style="text-align:left">
+						<ul style="list-style: none;">
+							<li>As <b><input style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.userstoryln1}}"></b></li>
+							<li><span style="float: left;"> I want to </span>&nbsp;&nbsp;<span><b><textarea class="custtextarea" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" id="txtAreaIWantTo">{{item.userstoryln2}}</textarea></b></span></li>
+							<li><span style="float: left;"> So I can </span>&nbsp;&nbsp;<span><b><textarea class="custtextarea" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" id="txtAreaSoICan">{{item.userstoryln3}}</textarea></b></span></li>
+						</ul>
+				</div>
+				
+				<div class="col-xs-2" style="text-align:left">
+					<div ng-repeat="criteria in item.criteria">
+						<b><textarea class="custtextarea" id="txtAreaCriteria" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" id="txtCriteria">{{criteria}}</textarea></b>
+					</div>
+				</div>
+				 <div class="col-xs-2" style="text-align:centre">
+					<b><textarea id="txtComments" class="custtextarea" style="font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" id="txtComments">{{item.comments}}</textarea></b>
+				</div> 
+				
+				<div class="col-xs-1" style="text-align:centre">
+					<b><input class="col-xs-1" style=" float:right; width: 34px;font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.points}}"></b>
+				</div>
+				<div class="col-xs-1" style="text-align:centre">
+					<b><input class="col-xs-1" style=" float:right; width: 34px;font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.cost}}"></b>
+				</div>
+				<div class="col-xs-1" style="text-align:centre">
+					<b><input class="col-xs-1" style=" float:right; width: 34px;font-size:13px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;text-transform: uppercase;" type="text" id="txtAs" value="{{item.days}}"></b>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

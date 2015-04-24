@@ -2404,6 +2404,10 @@ fieldset[disabled] .form-control {
 textarea.form-control {
   height: auto;
 }
+textarea.custtextarea{
+	width: 17em;
+	height: 4em;
+}
 input[type="search"] {
   -webkit-appearance: none;
 }

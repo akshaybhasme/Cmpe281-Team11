@@ -1,6 +1,6 @@
 cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal, $timeout,
 		$rootScope, $http) {
-	
+
 	$scope.theme1 = [ {
 		theme : 'Home page',
 		code : 'HOP',
@@ -12,7 +12,7 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal, 
 		comments : 'Assumed use of JQuery Lightbox',
 		points : 3,
 		cost: 800,
-		days: 1.0,
+		days: '1.0',
 		status: 'Completed',
 		sprint: 'sprint 5',
 		drag : true
@@ -28,7 +28,7 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal, 
 		comments : '',
 		points : 3,
 		cost: 800,
-		days: 1.0,
+		days: '1.0',
 		status: 'Accepted',
 		sprint: 'sprint 1',
 		drag : true
@@ -45,7 +45,7 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal, 
 		comments : 'No longer need to adhere to security requirements of lock out',
 		points : 5,
 		cost: 1333,
-		days: 1.7,
+		days: '1.7',
 		status: 'Accepted',
 		sprint: 'sprint 2',
 		drag : true
@@ -61,12 +61,26 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal, 
 		comments : 'Please refer to security document A1 for details on the existing strong password requirements',
 		points : 8,
 		cost: 2133,
-		days: 2.7,
+		days: '2.7',
 		status: 'Accepted',
 		sprint: 'sprint 4',
 		drag : true
 	}
 	];
-	
+
 	$scope.title = "easyBacklog Project";
+
+});
+cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance) {
+
+	$scope.ok = function() {
+		// console.log($scope.task);
+		$scope.story.drag=true;
+		$modalInstance.close($scope.story);
+
+	};
+
+	$scope.cancel = function() {
+		$modalInstance.dismiss('cancel');
+	};
 });
