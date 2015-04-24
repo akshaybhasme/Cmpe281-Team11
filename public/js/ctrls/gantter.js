@@ -22,6 +22,7 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
 	  ///$scope.dateobj=null;
   //console.log($scope.getDatetime);
   $scope.arrs=[];
+  $scope.taskindex=null;
   $scope.open = function (size) {
 
     var modalInstance = $modal.open({
@@ -34,11 +35,33 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
         }
       }
     });
-
+    var add=0;
     modalInstance.result.then(function (selectedItem) {
       //$scope.selected = selectedItem;
     	$scope.arrs.push(selectedItem);
-    	console.log($scope.arrs);
+    	for(i=0;i<$scope.arrs.length;i++){
+    		if($scope.arrs[i].subtask=="No")
+    			{
+    				$scope.taskindex=i;
+    				add=0;
+    			}
+    		//add=$scope.arrs[i].duration;
+    		if($scope.arrs[i].subtask=="Yes")
+    			{  
+    			add=(add+parseInt($scope.arrs[i].duration));
+    			if(parseInt($scope.arrs[$scope.taskindex].duration)<add){
+    			$scope.arrs[$scope.taskindex].duration=add;
+    			}
+    			else
+    			{
+    				//add=(add+parseInt($scope.arrs[i].duration));
+    				console.log(add);
+    			}
+    			}
+    		
+    		
+    	}
+    	
     	///$scope.arrs.push($scope.currDate);
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
@@ -80,7 +103,7 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
 			  duration:$scope.arr.duration,
 			  subtask:$scope.arr.ct
 	  };
-
+	  
 	  $modalInstance.close(a);
 	  
   };
