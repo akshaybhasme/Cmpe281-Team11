@@ -40,6 +40,7 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
       //$scope.selected = selectedItem;
     	$scope.arrs.push(selectedItem);
     	for(i=0;i<$scope.arrs.length;i++){
+    		
     		if($scope.arrs[i].subtask=="No")
     			{
     				$scope.taskindex=i;
@@ -96,14 +97,15 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
 	  var datenow=month+"-"+day+"-"+year;
 	  //var subtask=[];
 	  console.log($scope.arr.ct);
-
+	
 	  var a={
 			  task:$scope.arr.task,
 			  date:datenow,
 			  duration:$scope.arr.duration,
 			  subtask:$scope.arr.ct
 	  };
-	  
+	 
+	  //console.log($scope.arr.dataDate);
 	  $modalInstance.close(a);
 	  
   };

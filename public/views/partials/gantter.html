@@ -13,8 +13,8 @@
 	<div class="col-xs-1 btn btn-sm btn-info" style="text-align: center;">
 		<b>Duration</b>
 	</div>
-	<div class="col-xs-8 btn btn-sm btn-info" style="text-align:center;overflow:scroll;white-space: nowrap;padding:0;margin:0;float:left;margin-right:-999em;position:fixed;">
-		<div class="col-xs-1" style="margin:0;"
+	<div class="col-xs-8 btn btn-sm btn-info" style="text-align:center;">
+		<div class="col-xs-1" data-ng-model="arr.dataDate"
 			data-ng-repeat="data in datepush track by $index">
 			<b>{{data|date:'dd-MM-yyyy'}}</b>
 		</div>
@@ -45,7 +45,7 @@
 						</tr>
 					</table>
 				</div>
-			<div class="col-xs-8" style="overflow:scroll;">
+			<div class="col-xs-8">
 				<div class="col-xs-{{arr.duration}}" style="text-align: center;">
 					<br />
 					<div class="progress">
@@ -83,7 +83,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class="col-xs-8" style="overflow:scroll;">
+			<div class="col-xs-8">
 				<div class="col-xs-{{arr.duration}}" style="text-align: center;">
 					<br />
 					<div class="progress">
