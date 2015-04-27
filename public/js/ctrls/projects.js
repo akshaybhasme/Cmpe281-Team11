@@ -1,6 +1,7 @@
-cmpe.controller('projectsCtrl', function($scope, $stateParams, $log, $modal, $timeout,
+cmpe.controller('projectsCtrl', function($scope, $stateParams, $state, $log, $modal, $timeout,
 		$rootScope, $http) {
 
+	
 	$scope.list1 = [ {
 		id : 1,
 		title: 'Project1',
