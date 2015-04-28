@@ -49,6 +49,42 @@ router.post('/addProject/:type', function(req, res){
 	
 });
 
+router.delete('/deleteProject/:projectID', function(req, res){
+
+	sess = req.session;
+	
+	if(!sess.email){
+		res.send({error : "401 Unauthorized"});
+		return;
+	}
+	
+	var projectID = req.param.projectID;
+	
+	Project.remove({_id : projectID}, function(err){
+		if(err) {throw err;}
+		
+		res.send({status: "Done"});
+	});
+	
+});
+
+router.put('/updateProject/:projectID', function(req, res){
+	
+	sess = req.session;
+	
+	if(!sess.email){
+		res.send({error : "401 Unauthorized"});
+		return;
+	}
+	
+	var projectID = req.param.projectID;
+	
+	Project.update({_id : projectID}, {object : req.body.object}, {multi : false}, function(err, project){
+		res.send(project);
+	});
+	
+});
+
 router.get('/getTasks/:type/:projectID', function(req, res){
 	
 	sess = req.session;
@@ -84,6 +120,42 @@ router.post('/addTask/:type/:projectID', function(req, res){
 	
 	task.save(function(err){
 		if(err) {throw err;}
+		res.send(task);
+	});
+	
+});
+
+router.delete('/deleteTask/:taskID', function(req, res){
+
+	sess = req.session;
+	
+	if(!sess.email){
+		res.send({error : "401 Unauthorized"});
+		return;
+	}
+	
+	var taskID = req.param.taskID;
+	
+	Task.remove({_id : taskID}, function(err){
+		if(err) {throw err;}
+		
+		res.send({status: "Done"});
+	});
+	
+});
+
+router.put('/updateTask/:taskID', function(req, res){
+	
+	sess = req.session;
+	
+	if(!sess.email){
+		res.send({error : "401 Unauthorized"});
+		return;
+	}
+	
+	var taskID = req.param.taskID;
+	
+	Task.update({_id : taskID}, {object : req.body.object}, {multi : false}, function(err, task){
 		res.send(task);
 	});
 	
