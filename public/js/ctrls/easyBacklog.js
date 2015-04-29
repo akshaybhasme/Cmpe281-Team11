@@ -1,7 +1,7 @@
 cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal, $timeout,
 		$rootScope, $http) {
 
-	$scope.theme1 = [ {
+	$scope.theme1 = [{
 		theme : 'Home page',
 		code : 'HOP',
 		id : 'HOP5',
