@@ -7,7 +7,7 @@ var sess;
 var Project = mongoose.model('projects', {type: String, object : {}, users: []});
 var Task = mongoose.model('tasks', {type: String, object : {}, users: [], projects: []});
 
-/* GET users listing. */
+/* GET users listing. */						
 router.get('/', function(req, res) {
   res.send('This is the apps API');
 });
@@ -108,15 +108,15 @@ router.post('/addTask/:type/:projectID', function(req, res){
 	
 	sess = req.session;
 	
-	if(!sess.email){
+	if(!sess.email){								// User is not logged in
 		res.send({error : "401 Unauthorized"});
 		return;
 	}
 	
-	var type = req.params.type;
+	var type = req.params.type; 									//defining project type and ID
 	var projectID = req.params.projectID;
 	
-	var task = new Task({type: type, object: req.body.object, users: [sess.user_id], projects: [projectID]});
+	var task = new Task({type: type, object: req.body.object, users: [sess.user_id], projects: [projectID]});  // task is created
 	
 	task.save(function(err){
 		if(err) {throw err;}
@@ -125,7 +125,7 @@ router.post('/addTask/:type/:projectID', function(req, res){
 	
 });
 
-router.delete('/deleteTask/:taskID', function(req, res){
+router.delete('/deleteTask/:taskID', function(req, res){				//for deleting the task
 
 	sess = req.session;
 	
