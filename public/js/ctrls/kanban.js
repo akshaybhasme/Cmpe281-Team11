@@ -1,5 +1,5 @@
-cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal, $timeout,
-		$rootScope, $http) {
+cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal,
+		$timeout, $rootScope, $http) {
 
 	$scope.list1 = [ {
 		id : 3,
@@ -18,8 +18,8 @@ cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal, $time
 		status : 1,
 		drag : true
 	} ];
-	
-	$scope.list2 = [{
+
+	$scope.list2 = [ {
 		id : 1,
 		title : 'task1',
 		description : 'Desc one',
@@ -35,8 +35,8 @@ cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal, $time
 		duration : 11,
 		status : 2,
 		drag : true
-	}];
-	
+	} ];
+
 	$scope.list3 = [ {
 		id : 5,
 		title : 'task5',
@@ -53,48 +53,65 @@ cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal, $time
 		duration : 10,
 		status : 3,
 		drag : true
-	}];
+	} ];
 
 	$scope.title = "KANBAN Project";
 
 	$scope.getListing = function() {
+		$http.get('/api/listings/' + $scope.apartment.place_id).success(
+				function(data) {
+					$scope.data = [];
+					angular.forEach(data, function(v, i) {
+						if (v.status == 1) {
+							$scope.list1.push(v);
+						} else if (v.status == 2) {
+							$scope.list2.push(v);
+						} else {
+							$scope.list3.push(v);
+						}
+					});
+
+				});
+	};
+	
+	$scope.dropSuccessHandler= function($event,$index,list){
+		console.log(In);
+	}
+	
+	$scope.updateListing = function($event,$index,list) {
+		
+		console.log(list[$index]);
+		//$scope.list1.splice($scope.list1.indexOf(listing), 1);
+	};
+
+	$scope.deleteListing1 = function(listing) {
+		$scope.list1.splice($scope.list1.indexOf(listing), 1);
 		/*
-		 * $http.get('/api/listings/'+$scope.apartment.place_id).success(function(data){
-		 * $scope.data = []; angular.forEach(data, function(v, i){
-		 * if(v.stickyUntil > new Date().getTime()){
-		 * $scope.stickyListings.push(v); } else{ $scope.listings.push(v); } });
-		 * $scope.allListings = data; });
+		 * $http({ method: "post", url: "api/listings/delete/"+listing._id
+		 * }).success(function(data){ $scope.getListing(); });
 		 */
 	};
 
-	$scope.deleteListing1 = function(listing) {		
-		$scope.list1.splice($scope.list1.indexOf(listing),1);
+	$scope.deleteListing2 = function(listing) {
+		$scope.list2.splice($scope.list2.indexOf(listing), 1);
 		/*
 		 * $http({ method: "post", url: "api/listings/delete/"+listing._id
 		 * }).success(function(data){ $scope.getListing(); });
 		 */
 	};
-	
-	$scope.deleteListing2 = function(listing) {		
-		$scope.list2.splice($scope.list2.indexOf(listing),1);
+
+	$scope.deleteListing3 = function(listing) {
+		$scope.list3.splice($scope.list3.indexOf(listing), 1);
 		/*
 		 * $http({ method: "post", url: "api/listings/delete/"+listing._id
 		 * }).success(function(data){ $scope.getListing(); });
 		 */
 	};
-	
-	$scope.deleteListing3 = function(listing) {		
-		$scope.list3.splice($scope.list3.indexOf(listing),1);
-		/*
-		 * $http({ method: "post", url: "api/listings/delete/"+listing._id
-		 * }).success(function(data){ $scope.getListing(); });
-		 */
-	};
-	
-	$scope.items=[];
+
+	$scope.items = [];
 	$scope.open = function() {
 		var modalInstance = $modal.open({
-			
+
 			templateUrl : 'views/modals/kanbanModal.html',
 			controller : 'modalKanbanCtrl',
 			resolve : {
@@ -105,15 +122,15 @@ cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal, $time
 		});
 
 		modalInstance.result.then(function(selectedItem) {
-			if(selectedItem.status==1)
+			if (selectedItem.status == 1)
 				$scope.list1.push(selectedItem);
-			
-			else if(selectedItem.status==2)
+
+			else if (selectedItem.status == 2)
 				$scope.list2.push(selectedItem);
-			
-			else if(selectedItem.status==3)
+
+			else if (selectedItem.status == 3)
 				$scope.list3.push(selectedItem);
-			
+
 		}, function() {
 			$log.info('Modal dismissed at: ' + new Date());
 		});
@@ -124,7 +141,7 @@ cmpe.controller('modalKanbanCtrl', function($scope, $modalInstance) {
 
 	$scope.ok = function() {
 		// console.log($scope.task);
-		$scope.task.drag=true;
+		$scope.task.drag = true;
 		$modalInstance.close($scope.task);
 
 	};

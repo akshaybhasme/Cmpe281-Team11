@@ -7,7 +7,7 @@
 	<i class="fa fa-user"></i>
 </div>
 <form name="loginForm">
-	<input class="form-control" data-ng-model="user.username" type="email"
+	<input class="form-control" data-ng-model="user.email" type="email"
 		placeholder="Email" required="required" />
 	<div class="separator"></div>
 	<input type="password" class="form-control"
@@ -16,11 +16,11 @@
 	<div class="separator"></div>
 	<div class="text-center">
 		<button class="btn btn-primary" data-ng-click="doLogin()"
-			data-ng-disabled="!loginForm.$valid">Login
-			<span data-ng-if="!logging">Login</span> <span data-ng-if="logging"><i
+			data-ng-disabled="!loginForm.$valid">Login <span data-ng-if="logging"><i
 				class="fa fa-spinner fa-spin"></i> Logging in...</span>
 		</button>
 	</div>
+	<div class="text-danger text-center">{{status}}</div>
 </form>
 </div>
 </div>
