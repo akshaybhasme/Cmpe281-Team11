@@ -3,6 +3,11 @@ cmpe.controller('loginCtrl', function($scope, $stateParams, $state, $log, $modal
 	
 	$scope.user={};
 	
+	$scope.user={
+			  type:"Kanban"
+	  }
+	$scope.projecttype=["Kanban","Easyback","Gantter"];
+	
 	$scope.doLogin = function() {
 		var user={
 				email: $scope.user.email,
