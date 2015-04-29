@@ -1,4 +1,12 @@
 <div>{{title}}</div>
+<div>
+	<div>
+		<b>Projects  </b>
+		<button class="btn btn-success btn-sm" ng-click="open()">
+			<span class="glyphicon glyphicon-plus" aria-expanded="false"></span>
+		</button>
+	</div>
+</div>
 <div ng-repeat="item in list1">
 	<div data-ui-sref="root.app.kanban" data-ng-if="item.type=='Kanban'">
 		<div class="col-xs-2">

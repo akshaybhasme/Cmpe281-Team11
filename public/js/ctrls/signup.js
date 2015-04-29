@@ -3,11 +3,16 @@ cmpe.controller('signupCtrl', function($scope, $stateParams, $state, $log, $moda
 	
 	$scope.user={};
 	
+	$scope.user={
+			  type:"Kanban"
+	  }
+	$scope.projecttype=["Kanban","Easyback","Gantter"];
+	
 	$scope.signup = function() {
 		var user={
 				name: $scope.user.name,
 				email: $scope.user.email,
-				password: $scope.user.password
+				password: $scope.user.password,
 		}
 		$http.post("/users/register",user).success(function(data){
 			console.log(data);

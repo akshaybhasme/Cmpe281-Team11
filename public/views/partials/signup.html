@@ -12,6 +12,17 @@
 		<input class="form-control" data-ng-model="user.email" type="email" placeholder="Email" required />
 		<div class="separator"></div>
 		<input type="password" class="form-control" data-ng-model="user.password" placeholder="Password" required />
+		
+		<div class="separator"></div>
+	  <div dropdown>	     
+	      	<select type="button" class="btn btn-info dropdown-toggle" dropdown-toggle data-ng-model="user.type" data-ng-options="type for type in projecttype">
+	      	</select> 
+	        <span class="caret"></span>	
+	        <span class="sr-only">Split button!</span>	      
+	      <div class="dropdown-menu" role="menu">	      	
+	      </div>
+      </div>
+		
 		<div class="separator"></div>
 		<div class="text-center">
 			<button class="btn btn-primary" data-ng-click="signup()" data-ng-disabled="!regForm.$valid">

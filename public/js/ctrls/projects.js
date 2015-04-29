@@ -65,7 +65,9 @@ cmpe.controller('projectsCtrl', function($scope, $stateParams, $state, $log, $mo
 cmpe.controller('modalProjectsCtrl', function($scope, $modalInstance) {
 
 	$scope.ok = function() {
-		$modalInstance.close($scope.task);
+		$scope.project.id=4;
+		$scope.project.type="Kanban";
+		$modalInstance.close($scope.project);
 
 	};
 
