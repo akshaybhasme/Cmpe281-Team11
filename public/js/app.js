@@ -42,7 +42,7 @@ cmpe.config(function($stateProvider, $urlRouterProvider) {
 		views : {
 			'container@' : {
 				templateUrl : 'views/partials/kanban-list.html',
-				controller : 'kanbanCtrl'
+				controller : 'projectsCtrl'
 			}
 		}
 	}).state('root.app.kanban.project', {
@@ -57,8 +57,8 @@ cmpe.config(function($stateProvider, $urlRouterProvider) {
 		url : 'gantter',
 		views : {
 			'container@' : {
-				templateUrl : 'views/partials/gantter-list.html',
-				controller : 'gantterCtrl'
+				templateUrl : 'views/partials/kanban-list.html',
+				controller : 'projectsCtrl'
 			}
 		}
 	}).state('root.app.gantter.project', {
@@ -73,8 +73,8 @@ cmpe.config(function($stateProvider, $urlRouterProvider) {
 		url : 'easybacklog',
 		views : {
 			'container@' : {
-				templateUrl : 'views/partials/easyBacklog-list.html',
-				controller : 'easybacklogCtrl'
+				templateUrl : 'views/partials/kanban-list.html',
+				controller : 'projectsCtrl'
 			}
 		}
 	}).state('root.app.easybacklog.project', {

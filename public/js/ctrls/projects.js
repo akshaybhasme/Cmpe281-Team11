@@ -1,50 +1,38 @@
 cmpe.controller('projectsCtrl', function($scope, $stateParams, $state, $log, $modal, $timeout,
 		$rootScope, $http) {
 
-	
-	$scope.list1 = [ {
-		id : 1,
-		title: 'Project1',
-		type : 'Kanban',
-		description : 'Desc Kanban',
-	}, {
-		id : 2,
-		title: 'Project2',
-		type : 'EasyBackog',
-		description : 'Desc Easybacklog',
-	}, {
-		id : 3,
-		title: 'Project3',
-		type : 'Gantter',
-		description : 'Desc Gantter',
-	} ];
-	
-
 	$scope.title = "User Projects";
+	
+	$scope.projects = [];
 
 	$scope.getListing = function() {
-		/*
-		 * $http.get('/api/listings/'+$scope.apartment.place_id).success(function(data){
-		 * $scope.data = []; angular.forEach(data, function(v, i){
-		 * if(v.stickyUntil > new Date().getTime()){
-		 * $scope.stickyListings.push(v); } else{ $scope.listings.push(v); } });
-		 * $scope.allListings = data; });
-		 */
+		
+		if($state.current.name == "root.app.kanban")
+			$scope.type = "kanban";
+
+		if($state.current.name == "root.app.easybacklog")
+			$scope.type = "easybacklog";
+
+		if($state.current.name == "root.app.gantter")
+			$scope.type = "gantter";
+
+		$http.get('/api/getProjects/'+$scope.type).success(function(data){
+			$scope.projects = data; 
+		});
 	};
 
 	$scope.deleteListing = function(listing) {		
 		$scope.list1.splice($scope.list1.indexOf(listing),1);
-		/*
-		 * $http({ method: "post", url: "api/listings/delete/"+listing._id
-		 * }).success(function(data){ $scope.getListing(); });
-		 */
+		$http({ method: "post", url: "api/listings/delete/"+listing._id}).success(function(data){ 
+			$scope.getListing(); 
+		});
+
 	};
-	
-	
+
 	$scope.items=[];
 	$scope.open = function() {
 		var modalInstance = $modal.open({
-			
+
 			templateUrl : 'views/modals/projectsModal.html',
 			controller : 'modalProjectsCtrl',
 			resolve : {
@@ -55,23 +43,47 @@ cmpe.controller('projectsCtrl', function($scope, $stateParams, $state, $log, $mo
 		});
 
 		modalInstance.result.then(function(selectedItem) {
-				$scope.list1.push(selectedItem);		
+			$scope.projects.push(selectedItem);
 		}, function() {
 			$log.info('Modal dismissed at: ' + new Date());
 		});
 	};
+	
+	$scope.viewProject = function(project){
+		if(project.type == "kanban")
+			$state.go('root.app.kanban.project', {projectID: project._id});
+		
+		if(project.type == "gantter")
+			$state.go('root.app.gantter.project', {projectID: project._id});
+		
+		if(project.type == "easybacklog")
+			$state.go('root.app.easybacklog.project', {projectID: project._id});
+	};
+	
+	$scope.getListing();
 });
 
-cmpe.controller('modalProjectsCtrl', function($scope, $modalInstance) {
+cmpe.controller('modalProjectsCtrl', function($scope, $modalInstance, $state, $http) {
+
+	if($state.current.name == "root.app.kanban")
+		$scope.type = "kanban";
+
+	if($state.current.name == "root.app.easybacklog")
+		$scope.type = "easybacklog";
+
+	if($state.current.name == "root.app.gantter")
+		$scope.type = "gantter";
 
 	$scope.ok = function() {
-		$scope.project.id=4;
-		$scope.project.type="Kanban";
-		$modalInstance.close($scope.project);
+
+		$http.post('/api/addProject/'+$scope.type, {object : $scope.project}).success(function(data){
+			$modalInstance.close(data);
+		});
 
 	};
 
 	$scope.cancel = function() {
 		$modalInstance.dismiss('cancel');
 	};
+
 });
