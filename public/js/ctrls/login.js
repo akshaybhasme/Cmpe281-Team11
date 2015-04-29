@@ -4,6 +4,7 @@ cmpe.controller('loginCtrl', function($scope, $stateParams, $state, $log, $modal
 	$scope.user={};
 	
 	$scope.doLogin = function() {
+		console.log('test');
 		var user={
 				email: $scope.user.email,
 				password: $scope.user.password
