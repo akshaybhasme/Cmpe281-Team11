@@ -1,35 +1,41 @@
 
-			<div class="modal-header">
-				<h3 class="modal-title">New Task</h3>
-			</div>
-			<div class="modal-body">
-				<div class="col-xs-4">Title:</div>
-				<div class="col-xs-8">
-					<input ng-model="task.title" type="text" name="title"></input>
-				</div>
-				</br> </br>
-				<div class="col-xs-4">Task Description:</div>
-				<div class="col-xs-8">
-					<textarea ng-model="task.description" id="text" rows="3" cols="40"
-						name="task" style="border: thin; border-style: solid;">Enter description here...</textarea>
-				</div>
-				</br> </br>
-				<div class="col-xs-4">Duration:</div>
-				<div class="col-xs-8">
-					<input ng-model="task.duration" type="text" name="duration"></input>
-				</div>
-				</br> </br>
-				<div class="col-xs-4">User Assigned:</div>
-				<div class="col-xs-8">
-					<input ng-model="task.assigneduser" type="text" name="assigneduser"></input>
-				</div>
-				</br> </br>
-				<div class="col-xs-4">Status:</div>
-				<div class="col-xs-8">
-					<input ng-model="task.status" type="text" name="status"></input>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-primary" ng-click="ok()">Save</button>
-				<button class="btn btn-danger" ng-click="cancel()">Cancel</button>
-			</div>
+<div class="modal-header">
+	<h3 class="modal-title">New Task</h3>
+</div>
+<div class="modal-body">
+	<div class="col-xs-4">Title:</div>
+	<div class="col-xs-8">
+		<input ng-model="task.title" type="text" name="title"></input>
+	</div>
+	</br> </br>
+	<div class="col-xs-4">Task Description:</div>
+	<div class="col-xs-8">
+		<textarea ng-model="task.description" id="text" rows="3" cols="40"
+			name="task" style="border: thin; border-style: solid;">Enter description here...</textarea>
+	</div>
+	</br> </br>
+	<div class="col-xs-4">Duration:</div>
+	<div class="col-xs-8">
+		<input ng-model="task.duration" type="text" name="duration"></input>
+	</div>
+	</br> </br>
+	<div class="col-xs-4">User Assigned:</div>
+	<div class="col-xs-8">
+		<input ng-model="task.assigneduser" type="text" name="assigneduser"></input>
+	</div>
+	</br> </br>
+	<div class="col-xs-4">Status:</div>
+	<div class="col-xs-8">
+		<div dropdown>
+			<select type="button" class="btn btn-default dropdown-toggle"
+				dropdown-toggle data-ng-model="task.status"
+				data-ng-options="status for status in projstatus" style="width: 100%">
+			</select>
+		</div>
+	</div>
+
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()">Save</button>
+	<button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+</div>
