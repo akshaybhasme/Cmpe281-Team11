@@ -26,6 +26,14 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log) {
 	        }
 	      }
 	    });
+	    
+	    $scope.deleteTask = function(listing) {
+			$scope.arrs.splice($scope.arrs.indexOf(listing), 1);
+			/*
+			 * $http({ method: "post", url: "api/listings/delete/"+listing._id
+			 * }).success(function(data){ $scope.getListing(); });
+			 */
+		};
     
     var add=0;
     modalInstance.result.then(function (selectedItem) {
@@ -121,6 +129,7 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
 	  $modalInstance.close(a);
 	  
   };
+
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
