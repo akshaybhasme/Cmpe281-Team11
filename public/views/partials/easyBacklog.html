@@ -2,11 +2,11 @@
 <div class="col-xs-12 " style="text-align: center;">
 	<b>{{title}}</b>
 </div>
-<div>
-	<div>
-		<b>Backlog</b>
+<div class="col-xs-12">
+	<div class="col-xs-1 label-success">
+		<b style="color: #FFFFFF";>Backlog</b>
 		<button class="btn btn-success btn-sm" ng-click="open()">
-			<span class="glyphicon glyphicon-plus" aria-expanded="false"></span>
+			<i class="glyphicon glyphicon-plus" aria-expanded="false"></i>
 		</button>
 	</div>
 </div>
@@ -41,8 +41,8 @@
 	</div>
 </div>
 <div class="col-xs-12">
-	<div class="row thumbnail" 
-		data-drop="true" ng-repeat="themes in backlog"
+	<div class="row thumbnail" data-drop="true"
+		ng-repeat="themes in backlog"
 		data-jqyoui-options="{accept:'.btn-draggable:not([ng-model=backlog])'}"
 		jqyoui-droppable="{multiple:true}">
 		<div class="col-xs-1">
@@ -57,12 +57,19 @@
 			<div class="row btn btn-default btn-draggable col-xs-12"
 				style="margin-top: 10px;" ng-repeat="item in themes.theme"
 				ng-show="item.code" data-drag="{{item.drag}}"
-				data-jqyoui-options="{revert: 'invalid'}" ng-model="theme1"
+				data-jqyoui-options="{revert: 'invalid'}"
 				jqyoui-draggable="{index: {{$index}},animate:true}">
 				<div class="col-xs-1">
 					<input class="col-xs-5" type="text" id="txtAs" value="{{item.id}}"></br>
 					<a class="col-xs-8" title="Delete story" style="color: #000;"
 						data-ng-click="deleteStory()" class="pointer">&#10006;</a>
+					<div class="col-xs-12 btn-group" dropdown>
+						<select type="button" class="btn btn-info dropdown-toggle"
+							dropdown-toggle data-ng-model="sprints.sprint">
+						</select> <span class="caret"></span> <span class="sr-only">Split
+							button!</span>
+						<div class="dropdown-menu" role="menu"></div>
+					</div>
 				</div>
 
 				<div class="col-xs-3" style="text-align: left">
@@ -105,6 +112,12 @@
 						value="{{item.days}}" style="float: none";>
 				</div>
 			</div>
+			<div class="col-xs-1">
+			</br>
+				<button type="button" class="btn btn-primary">Add Story</button>
+			</div>
 		</div>
 	</div>
+	<button type="button" class="btn btn-primary">Add Theme</button>
+	</br> </br> </br> </br> </br>
 </div>
