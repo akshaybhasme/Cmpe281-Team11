@@ -1,5 +1,5 @@
 var cmpe = angular
-		.module('cmpe', [ 'ui.router', 'ui.bootstrap', 'ngDragDrop' ]);
+		.module('cmpe', [ 'ui.router', 'ui.bootstrap', 'ngDragDrop', 'n3-pie-chart']);
 
 cmpe.config(function($stateProvider, $urlRouterProvider) {
 

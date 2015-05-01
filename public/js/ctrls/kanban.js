@@ -132,6 +132,29 @@ cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal,
 		});
 	};
 	$scope.getListing();
+	
+	$scope.showProgress = function(){
+		var modalInstance = $modal.open({
+
+			templateUrl : 'views/modals/kanban-progress.html',
+			controller : function($scope, data){
+				$scope.pie = {
+						data: data,
+						options: {thickness: 10}
+				};
+				console.log($scope.pie);
+			},
+			resolve : {
+				data : function() {
+					return [
+					        {label: "Requested", value: $scope.list1.length, color: "red"}, 
+					        {label: "In Progress", value: $scope.list2.length, color: "#00ff00"},
+					        {label: "Done", value: $scope.list3.length, color: "rgb(0, 0, 255)"}
+					      ];
+				}
+			}
+		});
+	};
 });
 
 cmpe.controller('modalKanbanCtrl', function($scope, $modalInstance) {
