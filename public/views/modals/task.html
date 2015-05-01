@@ -21,6 +21,15 @@
 	      <div class="dropdown-menu" role="menu">	      	
 	      </div>
       </div>
+      Add In:
+	  <div class="btn-group" dropdown>	     
+	      	<select type="button" class="btn btn-info dropdown-toggle" dropdown-toggle data-ng-model="arr.subname" data-ng-options="subtaskn for subtaskn in subtaskname">
+	      	</select>
+	        <span class="caret"></span>
+	        <span class="sr-only">Split button!</span>	      
+	      <div class="dropdown-menu" role="menu">	      	
+	      </div>
+      </div>
  </div>
  <div class="modal-footer">
      <button class="btn btn-primary" ng-click="ok()">Save</button>
