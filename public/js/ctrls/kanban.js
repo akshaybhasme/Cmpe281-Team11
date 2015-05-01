@@ -140,7 +140,7 @@ cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal,
 			controller : function($scope, data){
 				$scope.pie = {
 						data: data,
-						options: {thickness: 10}
+						options: {thickness: 150}
 				};
 				console.log($scope.pie);
 			},
