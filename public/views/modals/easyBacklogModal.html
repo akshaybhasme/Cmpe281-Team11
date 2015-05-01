@@ -6,19 +6,19 @@
 	<div class="col-xs-4">Sprint Start Date:</div>
 	<div class="col-xs-8">
 		<pre>
-				<em>{{sprint.sprint_details.startdate | date:'fullDate' }}</em>
+				<em>{{sprints.sprint_details.startdate | date:'fullDate' }}</em>
 			</pre>
 	</div>
 	<div class="col-xs-4"></div>
 	<div class="col-xs-8" style="display: inline-block; min-height: 290px;">
-		<datepicker ng-model="sprint.sprint_details.startdate"
+		<datepicker ng-model="sprints.sprint_details.startdate"
 			min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
 	</div>
 	</br> </br>
 	<div class="col-xs-12">
 		<div class="col-xs-4">Duration of Sprint in Working Days:</div>
 		<div class="col-xs-8">
-			<input ng-model="sprint.sprint_details.duration" type="text"
+			<input ng-model="sprints.sprint_details.duration" type="text"
 				name="velocity"></input>
 		</div>
 	</div>
@@ -26,12 +26,12 @@
 	<div class="col-xs-12">
 		<div class="col-xs-4">Team Velocity:</div>
 		<div class="col-xs-8">
-			<input ng-model="sprint.sprint_details.velocity" type="text"
+			<input ng-model="sprints.sprint_details.velocity" type="text"
 				name="velocity"></input>
 		</div>
 	</div>
 </div>
 <div class="modal-footer">
-	<button class="btn btn-primary" ng-click="create()">Create</button>
+	<button class="btn btn-primary" ng-click="createSprint()">Create</button>
 	<button class="btn btn-danger" ng-click="cancel()">Cancel</button>
 </div>

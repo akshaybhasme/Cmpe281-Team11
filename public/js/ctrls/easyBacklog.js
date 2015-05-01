@@ -4,31 +4,28 @@ cmpe
 				function($scope, $stateParams, $log, $modal, $timeout,
 						$rootScope, $http) {
 
-					$scope.sprints = [
-					                {
-					                	sprint : 'Sprint 1',
-					                	sprint_details : [{
-					                		start_date : '03/13/2015',
-					                		duration : 30,
-					                		velocity : 15
-					                	}]
-					                },
-					                {
-					                	sprint : 'Sprint 2',
-					                	sprint_details : [{
-					                		start_date : '01/13/2015',
-					                		duration : 20,
-					                		velocity : 24
-					                	}]
-					                },
-					                {
-					                	sprint : 'Sprint 3',
-					                	sprint_details : [{
-					                		start_date : '03/25/2015',
-					                		duration : 50,
-					                		velocity : 20
-					                	}]
-					                }]
+					$scope.sprints = [ {
+						sprintid : 'Sprint 1',
+						sprint_details : [ {
+							start_date : '03/13/2015',
+							duration : 30,
+							velocity : 15
+						} ]
+					}, {
+						sprintid : 'Sprint 2',
+						sprint_details : [ {
+							start_date : '01/13/2015',
+							duration : 20,
+							velocity : 24
+						} ]
+					}, {
+						sprintid : 'Sprint 3',
+						sprint_details : [ {
+							start_date : '03/25/2015',
+							duration : 50,
+							velocity : 20
+						} ]
+					} ];
 					$scope.backlog = [
 							{
 								name : 'Home page',
@@ -126,24 +123,88 @@ cmpe
 						});
 
 						modalInstance.result.then(function(selectedItem) {
-								$scope.sprint.push(selectedItem);
+							$scope.sprint.push(selectedItem);
 
 						}, function() {
 							$log.info('Modal dismissed at: ' + new Date());
+
 						});
+
 					};
+					$scope.deleteTheme = function(theme) {
+						$scope.backlog.splice(
+								$scope.backlog.indexOf(theme), 1);
+						/*
+						 * $http({ method: "post", url:
+						 * "api/listings/delete/"+listing._id
+						 * }).success(function(data){ $scope.getListing();
+						 * });
+						 */
+					};
+
+					$scope.deleteStory = function(story) {
+						$scope.backlog.theme.splice($scope.backlog.theme
+								.indexOf(theme), 1);
+						/*
+						 * $http({ method: "post", url:
+						 * "api/listings/delete/"+listing._id
+						 * }).success(function(data){ $scope.getListing();
+						 * });
+						 */
+					};
+
+					$scope.createStory = function() {
+
+					}
+
+					$scope.createTheme = function() {
+
+					}
+					$scope.totalthemes = [];
+					$scope.openCreateTheme = function() {
+						var modalInstance = $modal.open({
+
+							templateUrl : 'views/modals/themeModal.html',
+							controller : 'modalthemeCtrl',
+							resolve : {
+								totalthemes : function() {
+									return $scope.totalthemes;
+								}
+							}
+						});
+
+						modalInstance.result.then(function(selectedItem) {
+							$scope.sprint.push(selectedItem);
+
+						}, function() {
+							$log.info('Modal dismissed at: ' + new Date());
+
+						});
+
+					};
+					
 				});
 
 cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance) {
 
-	$scope.create = function() {
+	$scope.createSprint = function() {
 		// console.log($scope.task);
-		$scope.story.drag = true;
-		$modalInstance.close($scope.story);
 
 	};
 
 	$scope.cancel = function() {
+		$modalInstance.dismiss('cancel');
+	};
+});
+
+cmpe.controller('modalthemeCtrl', function($scope, $modalInstance) {
+
+	$scope.createTheme = function() {
+		// console.log($scope.task);
+
+	};
+
+	$scope.cancelTheme = function() {
 		$modalInstance.dismiss('cancel');
 	};
 });
