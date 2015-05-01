@@ -58,7 +58,7 @@ router.delete('/deleteProject/:projectID', function(req, res){
 		return;
 	}
 	
-	var projectID = req.param.projectID;
+	var projectID = req.params.projectID;
 	
 	Project.remove({_id : projectID}, function(err){
 		if(err) {throw err;}
@@ -77,7 +77,7 @@ router.put('/updateProject/:projectID', function(req, res){
 		return;
 	}
 	
-	var projectID = req.param.projectID;
+	var projectID = req.params.projectID;
 	
 	Project.update({_id : projectID}, {object : req.body.object}, {multi : false}, function(err, project){
 		res.send(project);
@@ -134,7 +134,7 @@ router.delete('/deleteTask/:taskID', function(req, res){				//for deleting the t
 		return;
 	}
 	
-	var taskID = req.param.taskID;
+	var taskID = req.params.taskID;
 	
 	Task.remove({_id : taskID}, function(err){
 		if(err) {throw err;}
@@ -153,7 +153,7 @@ router.put('/updateTask/:taskID', function(req, res){
 		return;
 	}
 	
-	var taskID = req.param.taskID;
+	var taskID = req.params.taskID;
 	
 	Task.update({_id : taskID}, {object : req.body.object}, {multi : false}, function(err, task){
 		res.send(task);
