@@ -22,9 +22,13 @@
 	<div class="col-xs-12" data-ng-repeat="arr in arrs track by $index">
 			<div data-ng-if="arr.subtask=='No'">
 				<div class="col-xs-2" style="text-align: center;">
+					
 					<table class="col-xs-2 table table-hover">
 						<tr class="active">
-							<td><b>Task: </b>{{arr.task}}</td>
+							<td>
+								<a title="Delete listing" style="color: #000;" data-ng-click="deleteTask(arr)" class="pointer">&#10006;</a>
+								<b>Task: </b>{{arr.task}}
+							</td>
 						</tr>
 					</table>
 					<!--  <div class="col-xs-12 btn btn-sm btn-info" data-ng-repeat="arr in arrs track by $index">
