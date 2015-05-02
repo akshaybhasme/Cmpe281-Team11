@@ -91,6 +91,8 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
             selectedItem.id = data._id;
             console.log(selectedItem);
             $scope.arrs.push(selectedItem);
+            
+            if(selectedItem.subtask=="Yes"){
             $scope.checkdatediff=[];
               function dateDiffInDays(a,b){
               var Date1 = a;
@@ -100,7 +102,7 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
               var timestamp2 = new Date(Date2).getTime();
 
               var diff = (Math.abs(timestamp1 - timestamp2) / 3600000)/24;
-              return Math.ceil(diff);
+              return Math.ceil(diff-1);
               }
               
               function max(a,b){
@@ -154,7 +156,7 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
                 console.log('Saved :' + data.duration);
               });
               }
-              
+            }
               
               $scope.getListing();
           });
@@ -210,7 +212,7 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
         var timestamp2 = new Date(Date2).getTime();
 
         var diff = (Math.abs(timestamp1 - timestamp2) / 3600000)/24;
-        return Math.ceil(diff);
+        return Math.ceil(diff-1);
         }
    
     $modalInstance.close(a);
