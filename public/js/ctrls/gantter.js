@@ -53,7 +53,43 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
 
     };
     
-    $scope.getListing();
+      $scope.getListing();
+      
+      $http.get("/users/all").success(function(data){
+    	  $scope.userlist=data;
+      });
+      //Resource Modal Open
+      $scope.openResource=function(i){
+    	  var modalInstance = $modal.open({
+    	        templateUrl: 'views/modals/resource.html',
+    	        controller: 'resourceGantterCtrl',
+    	        resolve: {
+    	          userlist: function () {
+    	            return $scope.userlist;
+    	          }
+    	        }
+    	      });
+    	  
+    	  modalInstance.result.then(function (selectedItem) {
+    		  $http.get("/api/getTaskByID/"+$scope.arrs[i].id).success(function(data){
+    			  //data.object.users.concat(selectedItem);
+    			  data.object.users = selectedItem;
+    			  $http.put("/api/updateTask/"+data.object.id,data.object).success(function(data){
+    				  console.log("Users updated:"+data);
+    			  });
+    			  console.log(data);
+    	      });
+    		  
+    	  }, function () {
+    	      $log.info('Modal dismissed at: ' + new Date());
+    	  });
+    	  
+    	  
+      }
+      
+      
+      
+      // Task Modal Open
       $scope.open = function (size) {
   
       var modalInstance = $modal.open({
@@ -102,7 +138,7 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
               var timestamp2 = new Date(Date2).getTime();
 
               var diff = (Math.abs(timestamp1 - timestamp2) / 3600000)/24;
-              return Math.ceil(diff-1);
+              return Math.ceil(diff);
               }
               
               function max(a,b){
@@ -217,7 +253,7 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
         var timestamp2 = new Date(Date2).getTime();
 
         var diff = (Math.abs(timestamp1 - timestamp2) / 3600000)/24;
-        return Math.ceil(diff-1);
+        return Math.ceil(diff);
         }
    
     $modalInstance.close(a);
@@ -228,4 +264,67 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
+});
+
+
+
+angular.module('cmpe').controller('resourceGantterCtrl', function ($scope, $http, $stateParams, $modalInstance, userlist) {
+	  //console.log(userlist);
+		$scope.userlist=[];
+		$http.get("/users/all").success(function(data){
+			for(var i=0;i<data.length;i++)	
+				$scope.userlist.push(data[i]);
+	  	  console.log($scope.userlist);
+	    });
+	  
+		$scope.checkedNames = [];
+	    $scope.toggleCheck = function (name) {
+	        if ($scope.checkedNames.indexOf(name) === -1) {
+	            $scope.checkedNames.push(name);
+	        } else {
+	            $scope.checkedFruits.splice($scope.checkedNames.indexOf(name), 1);
+	        }
+	    };
+	  $scope.getuser=[];
+	  $scope.ok = function () {
+	   // $scope.getuser.push($scope.arr.users);
+		 
+		  console.log($scope.checkedNames);
+		  
+		  /*
+	    var dt=$scope.arr.date;
+	    var year=dt.getFullYear()+"";
+	    var month=(dt.getMonth()+1)+"";
+	    var day=dt.getDate()+"";
+	    var datenow=month+"-"+day+"-"+year;
+	  
+	    var a={
+	        task:$scope.arr.task,
+	        date:datenow,
+	        duration:parseInt($scope.arr.duration),
+	        subtask:$scope.arr.ct,
+	        datediff: dateDiffInDays(new Date(), datenow),
+	        maintask: $scope.arr.subname
+	    };
+	    */
+	    /*
+	    function dateDiffInDays(a,b){
+	        var Date1 = a;
+	        var Date2= b;
+
+	        var timestamp1 = new Date(Date1).getTime();
+	        var timestamp2 = new Date(Date2).getTime();
+
+	        var diff = (Math.abs(timestamp1 - timestamp2) / 3600000)/24;
+	        return Math.ceil(diff-1);
+	        }*/
+	   
+	    $modalInstance.close($scope.checkedNames);
+	    
+	  };
+
+
+	  $scope.cancel = function () {
+	    $modalInstance.dismiss('cancel');
+	  };
 });
