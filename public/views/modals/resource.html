@@ -1,11 +1,10 @@
  <div class="modal-header">
- 	<h3 class="modal-title">New Task</h3>
+ 	<h3 class="modal-title">Select user to be assigned:</h3>
  </div>
  <div class="modal-body" style="text-align: center;">
-	 Select user to be assigned: 
-	 <div style="overflow:scroll; height:80px;">
-	 <label class="checkbox" data-ng-repeat="users in userlist track by $index">
-	    <input type="checkbox" data-ng-checked="checkedNames.indexOf(users._id) != -1" data-ng-click="toggleCheck(users._id)">{{users.name}}
+	 <div style="overflow:scroll; max-height:300px;">
+	 <label class="form-control" data-ng-repeat="users in userlist track by $index">
+	    <input type="checkbox" data-ng-checked="checkedNames.indexOf(users._id) != -1" data-ng-click="toggleCheck(users._id)"> {{users.name}}
   	 </label>
   	 </div>
  </div>

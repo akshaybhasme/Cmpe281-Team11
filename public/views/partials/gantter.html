@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12" data-ng-repeat="arr in arrs track by $index">
+		<div class="col-xs-12" style="border-bottom: #CCC solid 1px;" data-ng-repeat="arr in arrs track by $index">
 			<div data-ng-if="arr.subtask=='No'">
 				<div class="col-xs-2" style="text-align: center;padding-top: 10px;">
 					<a title="Delete listing" style="color: #000;" data-ng-click="deleteTask(arr)" class="pointer">&#10006;</a>
@@ -43,7 +43,7 @@
 				<div class="col-xs-1" style="text-align: center;padding-top: 10px;">
 					<button class="btn btn-primary btn-xs"
 					style="width: 1; height: 1;" data-ng-click="openResource($index)">
-						<span class="fa fa-plus" aria-expanded="false">Resources</span>
+						<i class="fa fa-plus"></i> Resources
 					</button>
 				</div>
 				<div class="col-xs-7">

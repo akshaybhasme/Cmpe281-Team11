@@ -282,7 +282,7 @@ angular.module('cmpe').controller('resourceGantterCtrl', function ($scope, $http
 	        if ($scope.checkedNames.indexOf(name) === -1) {
 	            $scope.checkedNames.push(name);
 	        } else {
-	            $scope.checkedFruits.splice($scope.checkedNames.indexOf(name), 1);
+	            $scope.checkedNames.splice($scope.checkedNames.indexOf(name), 1);
 	        }
 	    };
 	  $scope.getuser=[];
