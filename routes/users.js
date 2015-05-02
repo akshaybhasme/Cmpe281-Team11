@@ -78,4 +78,10 @@ router.post('/register', function(req, res){
 	
 });
 
+router.get('/all', function(req, res){
+	User.find({}, function(err, users){
+		res.send(users);
+	});
+});
+
 module.exports = router;
