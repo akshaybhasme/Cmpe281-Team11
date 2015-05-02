@@ -2,8 +2,9 @@
  	<h3 class="modal-title">New Task</h3>
  </div>
  <div class="modal-body">
+ <form name="taskform">
      Task Description:<br>
-    <textarea class="form-control" ng-model="arr.task" id="text" rows="3" cols="40" name="task"></textarea>
+    <textarea class="form-control" ng-model="arr.task" id="text" rows="3" cols="40" name="task" required="required"></textarea>
      <br/>
       Date:<pre>Selected date is: <em>{{arr.date | date:'fullDate' }}</em></pre>
 	    <div style="display:inline-block; min-height:290px;">
@@ -11,15 +12,16 @@
 	    </div>
 	 <br/>
 	 Duration:
-	 <input class="form-control" ng-model="arr.duration" type="text" name="duration"></input>
+	 <input class="form-control" ng-model="arr.duration" type="text" name="duration" required="required"></input>
 	 Subtask: 
 	 <select class="form-control" data-ng-model="arr.ct" data-ng-options="task for task in subtask">
 	 </select>
       Add In:
       <select class="form-control" id="check" data-ng-model="arr.subname" data-ng-options="subtaskn for subtaskn in subtaskname">
 	  </select>
+</form>
  </div>
  <div class="modal-footer">
-     <button class="btn btn-primary" ng-click="ok()">Save</button>
+     <button class="btn btn-primary" data-ng-disabled="!taskform.$valid" ng-click="ok()">Save</button>
      <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
  </div>
