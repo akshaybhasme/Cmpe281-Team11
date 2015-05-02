@@ -103,6 +103,24 @@ router.post('/addProjectToUser/:projectID', function(req, res){
 	});
 });
 
+router.get('/getTaskByID/:taskID', function(req, res){
+	
+	sess = req.session;
+	
+	if(!sess.email){
+		res.send({error : "401 Unauthorized"});
+		return;
+	}
+	
+	var type = req.params.type;
+	var taskID = req.params.taskID;
+	
+	Task.findOne({_id: taskID}, function(err, task){
+		res.send(task);
+	});
+	
+});
+
 router.get('/getTasks/:type/:projectID', function(req, res){
 	
 	sess = req.session;
