@@ -183,7 +183,9 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
       ct:"Yes"
   }
   
-  if($scope.)
+  if($scope.arr.ct=="Yes"){
+	  
+  }
   
   $scope.subtask=["Yes","No"];
   for(var i=0;i<$scope.arrs.length;i++){
