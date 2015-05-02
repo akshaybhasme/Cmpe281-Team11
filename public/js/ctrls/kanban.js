@@ -157,16 +157,34 @@ cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal,
 	};
 });
 
-cmpe.controller('modalKanbanCtrl', function($scope, $modalInstance) {
+cmpe.controller('modalKanbanCtrl', function($scope, $modalInstance, $http) {
 	$scope.task = {};
-
+	$scope.task.assignedusers=[];
+	$scope.users = [];
+	
+	$scope.getUsers = function() {
+		$http.get('/users/all').success(
+			function(data) {
+				angular.forEach(data, function(v, i) {
+					//console.log(v);
+					var val={
+							id: v._id, label: v.name
+					}
+					
+					$scope.users.push(val);
+				});
+				console.log($scope.users);
+			});
+	};
+	
+	$scope.getUsers();
+	
 	$scope.task = {
 		status : "Requested"
 	}
 	$scope.projstatus = [ "Requested", "In Progress", "Done" ];
 	$scope.ok = function() {
 		$modalInstance.close($scope.task);
-
 	};
 
 	$scope.cancel = function() {

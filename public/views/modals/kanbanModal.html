@@ -21,7 +21,7 @@
 	</br> </br>
 	<div class="col-xs-4">User Assigned:</div>
 	<div class="col-xs-8">
-		<input ng-model="task.assigneduser" type="text" name="assigneduser"></input>
+		<input ng-model="task.assignedusers" type="text" name="assigneduser"></input>
 	</div>
 	</br> </br>
 	<div class="col-xs-4">Status:</div>
@@ -33,6 +33,7 @@
 			</select>
 		</div>
 	</div>
+	<div ng-dropdown-multiselect="" options="users" selected-model="task.assignedusers"></div>
 
 </div>
 <div class="modal-footer">
