@@ -1,35 +1,23 @@
  <div class="modal-header">
-            <h3 class="modal-title">New Task</h3>
+ 	<h3 class="modal-title">New Task</h3>
  </div>
  <div class="modal-body">
-  
      Task Description:<br>
-    <textarea ng-model="arr.task" id="text" rows="3" cols="40" name="task" style="border: thin;border-style:solid;">Enter text here...</textarea>
+    <textarea class="form-control" ng-model="arr.task" id="text" rows="3" cols="40" name="task"></textarea>
      <br/>
       Date:<pre>Selected date is: <em>{{arr.date | date:'fullDate' }}</em></pre>
 	    <div style="display:inline-block; min-height:290px;">
 	        <datepicker ng-model="arr.date" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
 	    </div>
 	 <br/>
-	 Duration:<input ng-model="arr.duration" type="text" name="duration"></input>
-	 Subtask:
-	  <div class="btn-group" dropdown>	     
-	      	<select type="button" class="btn btn-info dropdown-toggle" dropdown-toggle data-ng-model="arr.ct" data-ng-options="task for task in subtask">
-	      	</select>
-	        <span class="caret"></span>
-	        <span class="sr-only">Split button!</span>	      
-	      <div class="dropdown-menu" role="menu">	      	
-	      </div>
-      </div>
+	 Duration:
+	 <input class="form-control" ng-model="arr.duration" type="text" name="duration"></input>
+	 Subtask: 
+	 <select class="form-control" data-ng-model="arr.ct" data-ng-options="task for task in subtask">
+	 </select>
       Add In:
-	  <div class="btn-group" dropdown>	     
-	      	<select id="check" type="button" class="btn btn-info dropdown-toggle" dropdown-toggle data-ng-model="arr.subname" data-ng-options="subtaskn for subtaskn in subtaskname">
-	      	</select>
-	        <span class="caret"></span>
-	        <span class="sr-only">Split button!</span>	      
-	      <div class="dropdown-menu" role="menu">	      	
-	      </div>
-      </div>
+      <select class="form-control" id="check" data-ng-model="arr.subname" data-ng-options="subtaskn for subtaskn in subtaskname">
+	  </select>
  </div>
  <div class="modal-footer">
      <button class="btn btn-primary" ng-click="ok()">Save</button>
