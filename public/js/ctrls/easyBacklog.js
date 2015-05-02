@@ -150,29 +150,21 @@ cmpe
 					};
 
 					$scope.totalStories = [];
-					$scope.openCreateStory = function() {
+					$scope.openCreateStory = function(i) {
 						var modalInstance = $modal.open({
 
 							templateUrl : 'views/modals/storyModal.html',
 							controller : 'modalStoryCtrl',
 							resolve : {
-								totalStories : function() {
-									return $scope.totalStories;
+								theme: function(){
+									return $scope.backlog[i];
 								}
 							}
 						});
 
 						modalInstance.result.then(function(selectedItem) {
-							console.log(selectedItem);
-							var o = {
-								object : {
-									theme:$scope.theme,
-									selectedItem
-							
-								}
-							}
-							$scope.backlog.push(o);
-
+							$scope.backlog[i].theme.push(selectedItem);
+							console.log($scope.backlog[i]);
 						}, function() {
 							$log.info('Modal dismissed at: ' + new Date());
 
@@ -231,10 +223,19 @@ cmpe.controller('modalThemeCtrl', function($scope, $modalInstance) {
 	};
 });
 
-cmpe.controller('modalStoryCtrl', function($scope, $modalInstance) {
+cmpe.controller('modalStoryCtrl', function($scope, $modalInstance, theme) {
 
 	$scope.createStory = function() {
-		$modalInstance.close($scope.backlog);
+
+			console.log($scope.backlog);
+//			theme.theme.push($scope.backlog);
+//			console.log(theme);
+			var obj=$scope.backlog.theme;
+			obj.code=1;
+			obj.status="accepted";
+			obj.drag=true;
+			console.log(obj.status);
+			$modalInstance.close(obj);
 	};
 
 	$scope.cancelStory = function() {
