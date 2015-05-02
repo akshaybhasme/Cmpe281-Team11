@@ -31,7 +31,6 @@ cmpe
 								name : 'Home page',
 								theme : [
 										{
-
 											code : 'HOP',
 											id : 'HOP5',
 											userstoryln1 : 'user',
@@ -132,13 +131,11 @@ cmpe
 
 					};
 					$scope.deleteTheme = function(theme) {
-						$scope.backlog.splice(
-								$scope.backlog.indexOf(theme), 1);
+						$scope.backlog.splice($scope.backlog.indexOf(theme), 1);
 						/*
 						 * $http({ method: "post", url:
 						 * "api/listings/delete/"+listing._id
-						 * }).success(function(data){ $scope.getListing();
-						 * });
+						 * }).success(function(data){ $scope.getListing(); });
 						 */
 					};
 
@@ -148,33 +145,33 @@ cmpe
 						/*
 						 * $http({ method: "post", url:
 						 * "api/listings/delete/"+listing._id
-						 * }).success(function(data){ $scope.getListing();
-						 * });
+						 * }).success(function(data){ $scope.getListing(); });
 						 */
 					};
 
-					$scope.createStory = function() {
-
-					}
-
-					$scope.createTheme = function() {
-
-					}
-					$scope.totalthemes = [];
-					$scope.openCreateTheme = function() {
+					$scope.totalStories = [];
+					$scope.openCreateStory = function() {
 						var modalInstance = $modal.open({
 
-							templateUrl : 'views/modals/themeModal.html',
-							controller : 'modalthemeCtrl',
+							templateUrl : 'views/modals/storyModal.html',
+							controller : 'modalStoryCtrl',
 							resolve : {
-								totalthemes : function() {
-									return $scope.totalthemes;
+								totalStories : function() {
+									return $scope.totalStories;
 								}
 							}
 						});
 
 						modalInstance.result.then(function(selectedItem) {
-							$scope.sprint.push(selectedItem);
+							console.log(selectedItem);
+							var o = {
+								object : {
+									theme:$scope.theme,
+									selectedItem
+							
+								}
+							}
+							$scope.backlog.push(o);
 
 						}, function() {
 							$log.info('Modal dismissed at: ' + new Date());
@@ -182,13 +179,39 @@ cmpe
 						});
 
 					};
-					
+					$scope.totalThemes = [];
+					$scope.openCreateTheme = function() {
+						var modalInstance = $modal.open({
+
+							templateUrl : 'views/modals/themeModal.html',
+							controller : 'modalThemeCtrl',
+							resolve : {
+								totalThemes : function() {
+									return $scope.totalThemes;
+								}
+							}
+						});
+
+						modalInstance.result.then(function(selectedItem) {
+							console.log(selectedItem);
+							var object = {
+								name : selectedItem.name,
+								theme : []
+							}
+							$scope.backlog.push(object);
+
+						}, function() {
+							$log.info('Modal dismissed at: ' + new Date());
+
+						});
+
+					};
+
 				});
 
 cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance) {
 
 	$scope.createSprint = function() {
-		// console.log($scope.task);
 
 	};
 
@@ -197,14 +220,24 @@ cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance) {
 	};
 });
 
-cmpe.controller('modalthemeCtrl', function($scope, $modalInstance) {
+cmpe.controller('modalThemeCtrl', function($scope, $modalInstance) {
 
 	$scope.createTheme = function() {
-		// console.log($scope.task);
-
+		$modalInstance.close($scope.backlog);
 	};
 
 	$scope.cancelTheme = function() {
+		$modalInstance.dismiss('cancel');
+	};
+});
+
+cmpe.controller('modalStoryCtrl', function($scope, $modalInstance) {
+
+	$scope.createStory = function() {
+		$modalInstance.close($scope.backlog);
+	};
+
+	$scope.cancelStory = function() {
 		$modalInstance.dismiss('cancel');
 	};
 });

@@ -64,7 +64,7 @@
 			</div>
 			<div class="col-xs-11">
 				<div class="row col-xs-12"
-					style="margin-top: 10px;" ng-repeat="item in themes.theme"
+					style="margin-top: 10px; border: 1px solid;" ng-repeat="item in themes.theme"
 					ng-show="item.code" data-drag="{{item.drag}}"
 					data-jqyoui-options="{revert: 'invalid'}"
 					jqyoui-draggable="{index: {{$index}},animate:true}">
@@ -84,10 +84,10 @@
 						<ul style="list-style: none;">
 							
 							<li class="col-xs-4">As</li>
-							<div class="col-xs-8"><label>{{item.userstoryln1}}</label></div>
+							<div class="col-xs-8">{{item.userstoryln1}}</div>
 							</br>
 							<li class="col-xs-4">I want to</li>
-							<div class="col-xs-8"><label>{{item.userstoryln2}}</label></div>
+							<div class="col-xs-8">{{item.userstoryln2}}</div>
 							<li class="col-xs-4">So I can</li>
 							<div class="col-xs-8">{{item.userstoryln3}}</div>
 						</ul>
@@ -106,7 +106,7 @@
 				<div class="col-xs-1">
 					</br>
 					<button type="button" class="btn btn-primary"
-						ng-click="createStory()">Add Story</button>
+						ng-click="openCreateStory()">Add Story</button>
 				</div>
 			</div>
 		</div>
