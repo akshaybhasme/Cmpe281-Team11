@@ -31,7 +31,6 @@ cmpe
 								name : 'Home page',
 								theme : [
 										{
-
 											code : 'HOP',
 											id : 'HOP5',
 											userstoryln1 : 'user',
@@ -107,6 +106,20 @@ cmpe
 										} ]
 							} ];
 
+
+					$scope.getTheme = function() {
+						$http.get('/api/getTasks/easyBacklog/' + $stateParams.projectID).success(
+								function(data) {
+									angular.forEach(data, function(v, i) {
+											v.object.id = v._id;
+											$scope.backlog.push(v.object);
+									});
+
+								});
+					};
+
+					$scope.getTheme();
+					
 					$scope.title = "easyBacklog Project";
 
 					$scope.items = [];
@@ -132,13 +145,11 @@ cmpe
 
 					};
 					$scope.deleteTheme = function(theme) {
-						$scope.backlog.splice(
-								$scope.backlog.indexOf(theme), 1);
+						$scope.backlog.splice($scope.backlog.indexOf(theme), 1);
 						/*
 						 * $http({ method: "post", url:
 						 * "api/listings/delete/"+listing._id
-						 * }).success(function(data){ $scope.getListing();
-						 * });
+						 * }).success(function(data){ $scope.getListing(); });
 						 */
 					};
 
@@ -148,47 +159,83 @@ cmpe
 						/*
 						 * $http({ method: "post", url:
 						 * "api/listings/delete/"+listing._id
-						 * }).success(function(data){ $scope.getListing();
-						 * });
+						 * }).success(function(data){ $scope.getListing(); });
 						 */
 					};
 
-					$scope.createStory = function() {
-
-					}
-
-					$scope.createTheme = function() {
-
-					}
-					$scope.totalthemes = [];
-					$scope.openCreateTheme = function() {
+					$scope.totalStories = [];
+					$scope.openCreateStory = function(i) {
 						var modalInstance = $modal.open({
 
-							templateUrl : 'views/modals/themeModal.html',
-							controller : 'modalthemeCtrl',
+							templateUrl : 'views/modals/storyModal.html',
+							controller : 'modalStoryCtrl',
 							resolve : {
-								totalthemes : function() {
-									return $scope.totalthemes;
+								theme : function() {
+									return $scope.backlog[i];
 								}
 							}
 						});
 
 						modalInstance.result.then(function(selectedItem) {
-							$scope.sprint.push(selectedItem);
-
+							$scope.backlog[i].theme.push(selectedItem);
+							console.log($scope.backlog[i]);
 						}, function() {
 							$log.info('Modal dismissed at: ' + new Date());
 
 						});
 
 					};
-					
+					$scope.updateTheme = function($event, $index, backlog) {
+						var o = {
+								object : list[$index]
+							};
+						$http.put("/api/updateTask/" + list[$index].id, o)
+						.success(function(data)  {
+							console.log('Saved :' + data);
+						});
+					};
+					$scope.totalThemes = [];
+					$scope.openCreateTheme = function() {
+						var modalInstance = $modal.open({
+
+							templateUrl : 'views/modals/themeModal.html',
+							controller : 'modalThemeCtrl',
+							resolve : {
+								totalThemes : function() {
+									return $scope.totalThemes;
+								}
+							}
+						});
+
+						modalInstance.result.then(function(selectedItem) {
+							console.log(selectedItem);
+							var o = {
+									object:{
+											name : selectedItem.name,
+											theme : []
+									}
+							};
+							console.log($stateParams.projectID);
+							$http.post(
+									"/api/addTask/easyBacklog/"
+											+ $stateParams.projectID, o)
+									.success(function(data) {
+										selectedItem.id = data._id;
+										$scope.backlog.push(selectedItem);
+										
+									});
+						}, function() {
+							$log.info('Modal dismissed at: ' + new Date());
+
+						});
+
+					};
+
 				});
 
 cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance) {
 
 	$scope.createSprint = function() {
-		// console.log($scope.task);
 
 	};
 
@@ -197,14 +244,33 @@ cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance) {
 	};
 });
 
-cmpe.controller('modalthemeCtrl', function($scope, $modalInstance) {
+cmpe.controller('modalThemeCtrl', function($scope, $modalInstance) {
 
 	$scope.createTheme = function() {
-		// console.log($scope.task);
-
+		$modalInstance.close($scope.backlog);
 	};
 
 	$scope.cancelTheme = function() {
+		$modalInstance.dismiss('cancel');
+	};
+});
+
+cmpe.controller('modalStoryCtrl', function($scope, $modalInstance, theme) {
+
+	$scope.createStory = function() {
+
+		console.log($scope.backlog);
+		// theme.theme.push($scope.backlog);
+		// console.log(theme);
+		var obj = $scope.backlog.theme;
+		obj.code = 1;
+		obj.status = "accepted";
+		obj.drag = true;
+		console.log(obj.status);
+		$modalInstance.close(obj);
+	};
+
+	$scope.cancelStory = function() {
 		$modalInstance.dismiss('cancel');
 	};
 });
