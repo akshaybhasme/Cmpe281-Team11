@@ -112,10 +112,11 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
 		 * }).success(function(data){ $scope.getListing(); });
 
     };*/
-
+		//$scope.totalduration=0;
 
 		modalInstance.result.then(function (selectedItem) {
 			//$scope.arrs.push(selectedItem);
+			
 			var add=0;
 			var o = {
 					object : selectedItem
@@ -188,9 +189,15 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
 						.success(function(data)  {
 							console.log('Saved :' + data.duration);
 						});
+						
+						
+						
+						
+						
 					}
+					console.log($scope.totalduration);
 				}
-
+				
 				$scope.getListing();
 			});
 
@@ -200,8 +207,8 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
 		});
 
 	};
-
-
+	
+	
 });
 
 //Please note that $modalInstance represents a modal window (instance) dependency.
@@ -219,12 +226,14 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
 	if($scope.arr.ct=="Yes"){
 
 	}
-
+	$scope.totalduration=0;
 	$scope.subtask=["Yes","No"];
 	for(var i=0;i<$scope.arrs.length;i++){
+		$scope.totalduration=+($scope.totalduration)+parseInt($scope.arrs[i].duration);
 		if($scope.arrs[i].subtask=="No")
 			$scope.subtaskname.push($scope.arrs[i].task)
 	}
+	console.log($scope.totalduration);
 	$scope.ok = function () {
 
 		var dt=$scope.arr.date;
@@ -239,7 +248,8 @@ angular.module('cmpe').controller('modalGantterCtrl', function ($scope, $modalIn
 				duration:parseInt($scope.arr.duration),
 				subtask:$scope.arr.ct,
 				datediff: dateDiffInDays(new Date(), datenow),
-				maintask: $scope.arr.subname
+				maintask: $scope.arr.subname,
+				percentcomplete:$scope.arr.percentcomplete
 		};
 
 		function dateDiffInDays(a,b){
@@ -269,7 +279,7 @@ angular.module('cmpe').controller('resourceGantterCtrl', function ($scope, $http
 	//console.log(userlist);
 	$scope.userlist=[];
 	$http.get("/users/all").success(function(data){
-		for(var i=0;i<data.length;i++)	
+		for(var i=0;i<data.length;i++)
 			$scope.userlist.push(data[i]);
 		console.log($scope.userlist);
 	});
