@@ -177,6 +177,26 @@ router.post('/addTask/:type/:projectID', function(req, res){
 	
 });
 
+router.put('/addTaskToProject/:projectID/:taskID', function(req, res){
+	
+	sess = req.session;
+	
+	if(!sess.email){
+		res.send({error : "401 Unauthorized"});
+		return;
+	}
+	
+	var projectID = req.params.projectID;
+	var taskID = req.params.taskID;
+	
+	Task.update({_id: taskID}, {$push: {projects: {$each: [req.params.taskID]}}}, {upsert: false}, function(err){
+		if(err) { throw err; }
+		
+		res.send({success: true});
+	});
+	
+});
+
 router.delete('/deleteTask/:taskID', function(req, res){				//for deleting the task
 
 	sess = req.session;
