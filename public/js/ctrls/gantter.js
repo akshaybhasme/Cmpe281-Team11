@@ -208,6 +208,18 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
 
 	};
 	
+	$scope.showProgress = function(){
+		var modalInstance = $modal.open({
+			templateUrl: 'views/modals/gantter-progress.html',
+			controller: 'gantterProgressCtrl',
+//			size: size,
+			resolve: {
+				tasks: function () {
+					return $scope.arrs;
+				}
+			}
+		});
+	};
 	
 });
 
