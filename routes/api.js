@@ -29,6 +29,22 @@ router.get('/getProjects/:type', function(req, res){
 	
 });
 
+router.get('/getProjectByID/:projectID', function(req, res){
+	sess = req.session;
+	
+	if(!sess.email){
+		res.send({error : "401 Unauthorized"});
+		return;
+	}
+	
+	var projectID = req.params.projectID;
+	
+	Project.findOne({_id: projectID}, function(err, project){
+		if(err) { throw err; }
+		res.send(project);
+	});
+});
+
 router.post('/addProject/:type', function(req, res){
 	
 	sess = req.session;
