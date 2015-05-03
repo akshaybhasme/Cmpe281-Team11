@@ -157,14 +157,45 @@ cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal,
 	};
 });
 
-cmpe.controller('modalKanbanCtrl', function($scope, $modalInstance) {
+cmpe.controller('modalKanbanCtrl', function($scope, $modalInstance, $http) {
 	$scope.task = {};
+	
+	
+	$scope.userlist=[];
+	
+	$http.get("/users/all").success(function(data){
+		for(var i=0;i<data.length;i++)
+			$scope.userlist.push(data[i]);
+		console.log($scope.userlist);
+	});
+
+	$scope.checkedNames = [];
+	$scope.toggleCheck = function (name) {
+		if ($scope.checkedNames.indexOf(name) === -1) {
+			$scope.checkedNames.push(name);
+		} else {
+			$scope.checkedNames.splice($scope.checkedNames.indexOf(name), 1);
+		}
+	};
 
 	$scope.task = {
 		status : "Requested"
 	}
 	$scope.projstatus = [ "Requested", "In Progress", "Done" ];
+	$scope.task.assigneduser=[];
 	$scope.ok = function() {
+		console.log("Userlist:"+$scope.userlist.length);
+		console.log("CheckedList:"+$scope.checkedNames.length);
+		for(var i=0;i<$scope.userlist.length;i++){
+			for(var j=0;j<$scope.checkedNames.length;j++){
+				if($scope.userlist[i]._id==$scope.checkedNames[j]){
+					console.log($scope.userlist[i]);
+					$scope.task.assigneduser.push($scope.userlist[i].name);
+				}
+			}
+		}
+			console.log("----------------"+$scope.task.assigneduser);
+		
 		$modalInstance.close($scope.task);
 
 	};
