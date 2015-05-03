@@ -24,25 +24,25 @@
 		</div>
 		<div class="col-xs-11 label-default">
 			<div class="row">
-				<div class="col-xs-1" style="text-align: center; color: #FFFFFF";>
+				<div class="col-xs-2" style="text-align: left; color: #FFFFFF";>
 					<b>ID</b>
 				</div>
-				<div class="col-xs-3" style="text-align: center; color: #FFFFFF";>
+				<div class="col-xs-2" style="text-align: left; color: #FFFFFF";>
 					<b>User Story</b>
 				</div>
-				<div class="col-xs-2" style="text-align: center; color: #FFFFFF";>
+				<div class="col-xs-2" style="text-align: left; color: #FFFFFF";>
 					<b>Acceptance Criteria</b>
 				</div>
-				<div class="col-xs-3" style="text-align: center; color: #FFFFFF";>
+				<div class="col-xs-3" style="text-align: left; color: #FFFFFF";>
 					<b>Comments</b>
 				</div>
-				<div class="col-xs-1" style="text-align: center; color: #FFFFFF";>
+				<div class="col-xs-1" style="text-align: left; color: #FFFFFF";>
 					<b>Points</b>
 				</div>
-				<div class="col-xs-1" style="text-align: center; color: #FFFFFF";>
+				<div class="col-xs-1" style="text-align: left; color: #FFFFFF";>
 					<b>Cost</b>
 				</div>
-				<div class="col-xs-1" style="text-align: center; color: #FFFFFF";>
+				<div class="col-xs-1" style="text-align: left; color: #FFFFFF";>
 					<b>Days</b>
 				</div>			
 			</div>
@@ -52,7 +52,7 @@
 <div class="row">
 	<div class="col-xs-12">
 		<div class="row thumbnail" data-drop="true"
-			ng-repeat="themes in backlog"
+			ng-repeat="themes in backlog "
 			data-jqyoui-options="{accept:'.btn-draggable:not([ng-model=backlog])'}"
 			jqyoui-droppable="{multiple:true}">
 			<div class="col-xs-1">
@@ -64,14 +64,14 @@
 			</div>
 			<div class="col-xs-11">
 				<div class="row col-xs-12"
-					style="margin-top: 10px;" ng-repeat="item in themes.theme"
+					style="margin-top: 10px; border: 1px solid;" ng-repeat="item in themes.theme track  by $index"
 					ng-show="item.code" data-drag="{{item.drag}}"
 					data-jqyoui-options="{revert: 'invalid'}"
 					jqyoui-draggable="{index: {{$index}},animate:true}">
 					<div class="col-xs-1">
 						{{item.id}}</br> <a class="col-xs-8" title="Delete story"
 							style="color: #000;" data-ng-click="deleteStory(item)"
-							class="pointer">&#10006;</a>
+							class="pointer">&#10006;</a> <i class="fa fa-pencil-square" ng-click="openEditStory($parent,$index)"></i>
 						<div class="col-xs-12 btn-group" dropdown>
 							<select type="button" class="btn btn-default"
 								data-ng-model="item.sprint"
@@ -84,10 +84,10 @@
 						<ul style="list-style: none;">
 							
 							<li class="col-xs-4">As</li>
-							<div class="col-xs-8"><label>{{item.userstoryln1}}</label></div>
+							<div class="col-xs-8">{{item.userstoryln1}}</div>
 							</br>
 							<li class="col-xs-4">I want to</li>
-							<div class="col-xs-8"><label>{{item.userstoryln2}}</label></div>
+							<div class="col-xs-8">{{item.userstoryln2}}</div>
 							<li class="col-xs-4">So I can</li>
 							<div class="col-xs-8">{{item.userstoryln3}}</div>
 						</ul>
@@ -99,14 +99,14 @@
 					</div>
 					<div class="col-xs-3">{{item.comments}}</div>
 	
-					<div class="col-xs-1">{{item.points}}</div>
+					<div class="col-xs-1"><span style="text-align: left;">{{item.points}}</span></div>
 					<div class="col-xs-1">{{item.cost}}</div>
 					<div class="col-xs-1">{{item.days}}</div>
 				</div>
 				<div class="col-xs-1">
 					</br>
 					<button type="button" class="btn btn-primary"
-						ng-click="createStory()">Add Story</button>
+						ng-click="openCreateStory($parent.$index,$index)">Add Story</button>
 				</div>
 			</div>
 		</div>

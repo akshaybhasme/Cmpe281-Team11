@@ -1,0 +1,70 @@
+<div class="modal-header">
+	<h3 class="modal-title">Add/Edit Story</h3>
+</div>
+<div class="modal-body">
+	<div class="col-xs-4">ID:</div>
+	<div class="col-xs-8">
+		<input ng-model="backlog.theme.id" type="text" name="id"></input>
+	</div>
+	</br> </br>
+	<div class="col-xs-1">User Story:</div>
+
+	<div class="col-xs-3">
+		<b>As</b>
+	</div>
+	<div class="col-xs-8">
+		<input ng-model="backlog.theme.userstoryln1" type="text" name="txtAs"></input>
+	</div>
+	</br> </br>
+	<div class="col-xs-1"></div>
+	<div class="col-xs-3">
+		<b>I want to</b>
+	</div>
+	<div class="col-xs-8">
+		<input ng-model="backlog.theme.userstoryln2" type="text"
+			name="txtIWantTo"></input>
+	</div>
+	</br> </br>
+	<div class="col-xs-1"></div>
+	<div class="col-xs-3">
+		<b>So I can</b>
+	</div>
+	<div class="col-xs-8">
+		<input ng-model="backlog.theme.userstoryln3" type="text"
+			name="txtSoICan"></input>
+	</div>
+	</br> </br>
+</div>
+</br>
+</br>
+<div class="col-xs-4">Acceptance Criteria:</div>
+<div class="col-xs-8">
+	<textarea ng-model="backlog.theme.criteria" rows="3" cols="40"
+		name="textareaComments" style="border: thin; border-style: solid;"></textarea> </br> </br>
+</div>
+<div class="col-xs-4">Comments:</div>
+<div class="col-xs-8">
+	<textarea ng-model="backlog.theme.comments" rows="3" cols="40"
+		name="textareaComments" style="border: thin; border-style: solid;"></textarea>
+	</br> </br>
+</div>
+</br>
+</br>
+<div class="col-xs-4">Points</div>
+<div class="col-xs-8">
+	<input ng-model="backlog.theme.points" type="text" name="txtPoints"></input>
+</div>
+<div class="col-xs-4">Cost</div>
+<div class="col-xs-8">
+	<input ng-model="backlog.theme.cost" type="text" name="txtCost"></input>
+</div>
+<div class="col-xs-4">Days</div>
+<div class="col-xs-8">
+	<input ng-model="backlog.theme.days" type="text" name="txtDays"></input>
+</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="createStory()">Ok</button>
+	<button class="btn btn-danger" ng-click="cancelStory()">Cancel</button>
+</div>
+</div>

@@ -80,8 +80,8 @@
 						<a title="Delete listing" style="color: #000;"
 							data-ng-click="deleteListing2(item)" class="pointer">&#10006;</a>
 					</div>
-					<div class="col-xs-6">
-						<b>User:</b><span>{{item.assigneduser}}</span>
+					<div class="col-xs-6" data-ng-repeat="users in item.assigneduser">
+						<b>User:</b><span>{{users}}</span>
 					</div>
 					<div class="col-xs-6">
 						<div>

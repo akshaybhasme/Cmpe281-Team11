@@ -1,59 +1,94 @@
-
-<div data-ng-controller="gantterCtrl">
-	<div class="col-xs-2 btn btn-sm btn-info" style="text-align: center;">
-		<b>Tasks</b> &nbsp;&nbsp;
-		<button class="btn btn-primary btn-xs"
-			style="width: 1; height: 1; position: fixed;" data-ng-click="open()">
-			<span class="glyphicon glyphicon-plus" aria-expanded="false"></span>
-		</button>
+<div class="row">
+	<div class="col-xs-12 text-center">
+		<button class="btn btn-default" data-ng-click="showProgress()">Show Progress</button>
 	</div>
-	<div class="col-xs-1 btn btn-sm btn-info" style="text-align: center;">
-		<b>Date</b>
-	</div>
-	<div class="col-xs-1 btn btn-sm btn-info" style="text-align: center;">
-		<b>Duration</b>
-	</div>
-	<div class="col-xs-8 btn btn-sm btn-info" style="text-align:center;">
-		<div class="col-xs-1" data-ng-model="arr.dataDate"
-			data-ng-repeat="data in datepush track by $index">
-			<b>{{data|date:'dd-MM-yyyy'}}</b>
+</div>
+<div class="separator"></div>
+<div class="row">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="col-xs-2 btn btn-sm btn-info" style="text-align: center;">
+				<b>Tasks</b> &nbsp;&nbsp;
+				<button class="btn btn-primary btn-xs"
+					style="width: 1; height: 1; position: fixed;" data-ng-click="open()">
+					<span class="fa fa-plus" aria-expanded="false"></span>
+				</button>
+			</div>
+			<div class="col-xs-1 btn btn-sm btn-info" style="text-align: center;">
+				<b>Date</b>
+			</div>
+			<div class="col-xs-1 btn btn-sm btn-info" style="text-align: center;">
+				<b>Duration</b>
+			</div>
+			<div class="col-xs-1 btn btn-sm btn-info" style="text-align: center;">
+				<b>Resources</b>
+			</div>
+			<div class="col-xs-7 btn btn-sm btn-info" style="text-align:center;">
+				<div class="col-xs-1" data-ng-model="arr.dataDate"
+					data-ng-repeat="data in datepush track by $index">
+					<b>{{data|date:'dd-MM-yyyy'}}</b>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="col-xs-12" data-ng-repeat="arr in arrs track by $index">
+	<div class="row">
+		<div class="col-xs-12" style="border-bottom: #CCC solid 1px;" data-ng-repeat="arr in arrs track by $index">
 			<div data-ng-if="arr.subtask=='No'">
-				<div class="col-xs-2" style="text-align: center;">
-					
-					<table class="col-xs-2 table table-hover">
-						<tr class="active">
-							<td>
-								<a title="Delete listing" style="color: #000;" data-ng-click="deleteTask(arr)" class="pointer">&#10006;</a>
-								<b>Task: </b>{{arr.task}}
-							</td>
-						</tr>
-					</table>
-					<!--  <div class="col-xs-12 btn btn-sm btn-info" data-ng-repeat="arr in arrs track by $index">
-						{{arr.task}}-->
+				<div class="col-xs-2" style="text-align: center;padding-top: 10px;">
+					<a title="Delete listing" style="color: #000;" data-ng-click="deleteTask(arr)" class="pointer">&#10006;</a>
+					<b>Task: </b>{{arr.task}}
 
 				</div>
-				<div class="col-xs-1" style="text-align: center;">
-					<table class="col-xs-12 table table-hover">
-						<tr class="active">
-							<td>{{arr.date}}</td>
-						</tr>
-					</table>
+				<div class="col-xs-1" style="text-align: center;padding-top: 10px;">
+					{{arr.date}}
 				</div>
-				<div class="col-xs-1" style="text-align: center;">
-					<table class="col-xs-1 table table-hover">
-						<tr class="active">
-							<td>{{arr.duration}}</td>
-						</tr>
-					</table>
+				<div class="col-xs-1" style="text-align: center;padding-top: 10px;">
+					{{arr.duration}}
 				</div>
-			<div class="col-xs-8">
-					<div class="col-xs-{{arr.datediff}}" style="text-align: center;">
+				<div class="col-xs-1" style="text-align: center;padding-top: 10px;">
+					<button class="btn btn-primary btn-xs"
+					style="width: 1; height: 1;" data-ng-click="openResource($index)">
+						<i class="fa fa-plus"></i> Resources
+					</button>
+				</div>
+				<div class="col-xs-7">
+						<div class="col-xs-{{arr.datediff}}" data-ng-if="arr.datediff != 0" style="text-align: center;">
+								&nbsp;
+						</div>
+						<div class="col-xs-{{arr.duration}}" style="text-align: center;margin-top: -10px;">
+							<br />
+							<div class="progress">
+								<div class="progress-bar" role="progressbar" aria-valuenow="60"
+									aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+									<span class="sr-only">60% Complete</span>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+
+			<div data-ng-if="arr.subtask=='Yes'">
+				<div class="col-xs-2" style="text-align: center;padding-top: 10px;">
+					<a title="Delete listing" style="color: #000;" data-ng-click="deleteTask(arr)" class="pointer">&#10006;</a>
+					<b>Subtask: </b>{{arr.task}}
+				</div>
+				<div class="col-xs-1" style="text-align: center;padding-top: 10px">
+					{{arr.date}}
+				</div>
+				<div class="col-xs-1" style="text-align: center;padding-top: 10px">
+					{{arr.duration}}
+				</div>
+				<div class="col-xs-1" style="text-align: center;padding-top: 10px;">
+					<button class="btn btn-primary btn-xs"
+					style="width: 1; height: 1;" data-ng-click="openResource()">
+						<span class="fa fa-plus" aria-expanded="false">Resources</span>
+					</button>
+				</div>
+				<div class="col-xs-7">
+					<div class="col-xs-{{arr.datediff}}" data-ng-if="arr.datediff != 0" style="text-align: center;">
 							&nbsp;
 					</div>
-					<div class="col-xs-{{arr.duration}}" style="text-align: center;">
+					<div class="col-xs-{{arr.duration}}" style="text-align: center;margin-top: -10px">
 						<br />
 						<div class="progress">
 							<div class="progress-bar" role="progressbar" aria-valuenow="60"
@@ -62,50 +97,11 @@
 							</div>
 						</div>
 					</div>
-			</div>
-		</div>
-
-		<div data-ng-if="arr.subtask=='Yes'">
-			<div class="col-xs-2" style="text-align: center;">
-				<table class="col-xs-2 table table-hover">
-					<tr class="warning">
-						<td><b>Subtask: </b>{{arr.task}}</td>
-					</tr>
-				</table>
-				<!--  <div class="col-xs-12 btn btn-sm btn-info" data-ng-repeat="arr in arrs track by $index">
-						{{arr.task}}-->
-
-			</div>
-			<div class="col-xs-1" style="text-align: center;">
-				<table class="col-xs-12 table table-hover">
-					<tr class="warning">
-						<td>{{arr.date}}</td>
-					</tr>
-				</table>
-			</div>
-			<div class="col-xs-1" style="text-align: center;">
-				<table class="col-xs-1 table table-hover">
-					<tr class="warning">
-						<td>{{arr.duration}}</td>
-					</tr>
-				</table>
-			</div>
-			<div class="col-xs-8">
-				<div class="col-xs-{{arr.datediff}}" style="text-align: center;">
-						&nbsp;
-				</div>
-				<div class="col-xs-{{arr.duration}}" style="text-align: center;">
-					<br />
-					<div class="progress">
-						<div class="progress-bar" role="progressbar" aria-valuenow="60"
-							aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-							<span class="sr-only">60% Complete</span>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 </div>
 
 

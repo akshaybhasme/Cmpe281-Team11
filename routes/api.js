@@ -85,6 +85,42 @@ router.put('/updateProject/:projectID', function(req, res){
 	
 });
 
+router.post('/addProjectToUser/:projectID', function(req, res){
+	
+	sess = req.session;
+	
+	if(!sess.email){
+		res.send({error : "401 Unauthorized"});
+		return;
+	}
+	
+	var projectID = req.params.projectID;
+	
+	Project.update({_id: projectID}, {$push: {users: {$each: [req.body.user]}}}, {upsert:true}, function(err){
+		if(err) { throw err; }
+		
+		res.send({success: true});
+	});
+});
+
+router.get('/getTaskByID/:taskID', function(req, res){
+	
+	sess = req.session;
+	
+	if(!sess.email){
+		res.send({error : "401 Unauthorized"});
+		return;
+	}
+	
+	var type = req.params.type;
+	var taskID = req.params.taskID;
+	
+	Task.findOne({_id: taskID}, function(err, task){
+		res.send(task);
+	});
+	
+});
+
 router.get('/getTasks/:type/:projectID', function(req, res){
 	
 	sess = req.session;

@@ -20,8 +20,11 @@
 	</div>
 	</br> </br>
 	<div class="col-xs-4">User Assigned:</div>
-	<div class="col-xs-8">
-		<input ng-model="task.assignedusers" type="text" name="assigneduser"></input>
+	<div class="col-xs-8" style="overflow:scroll; max-height:300px;">
+		<!--  <input ng-model="task.assigneduser" type="text" name="assigneduser"></input>-->
+			 <label data-ng-repeat="users in userlist track by $index">
+			    <input type="checkbox" data-ng-checked="checkedNames.indexOf(users._id) != -1" data-ng-click="toggleCheck(users._id)"> {{users.name}}
+		  	 </label>
 	</div>
 	</br> </br>
 	<div class="col-xs-4">Status:</div>
@@ -33,7 +36,6 @@
 			</select>
 		</div>
 	</div>
-	<div ng-dropdown-multiselect="" options="users" selected-model="task.assignedusers"></div>
 
 </div>
 <div class="modal-footer">
