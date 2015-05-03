@@ -113,9 +113,9 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 	};
 
 	$scope.totalStories = [];
-	$scope.openCreateStory = function(i,ci) {
+	$scope.openCreateStory = function(i) {
 		console.log($scope.backlog[i]);
-		console.log("index:" + i +" child index :"+ ci);
+		//console.log("index:" + i +" child index :"+ ci);
 		var modalInstance = $modal.open({
 
 			templateUrl : 'views/modals/storyModal.html',
@@ -128,7 +128,7 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 		});
 
 		modalInstance.result.then(function(selectedItem) {
-			console.log($scope.backlog[i].theme);
+//			console.log($scope.backlog[i].theme);
 			if ($scope.backlog[i].theme == undefined)
 				$scope.backlog[i].theme = [];
 			if($scope.backlog[i].name.length>=3)
@@ -155,9 +155,9 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 
 	};
 
-	$scope.openEditStory = function(i,ci) {
+	$scope.openEditStory = function(i) {
 		console.log($scope.backlog[i]);
-		console.log("index:" + i +" child index :"+ ci);
+		//console.log("index:" + i +" child index :"+ ci);
 		var modalInstance = $modal.open({
 
 			templateUrl : 'views/modals/storyModal.html',
