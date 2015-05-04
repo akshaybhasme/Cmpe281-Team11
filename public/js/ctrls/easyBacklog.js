@@ -97,25 +97,33 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 
 	};
 	$scope.deleteTheme = function(theme) {
-		$scope.backlog.splice($scope.backlog.indexOf(theme), 1);
-		/*
-		 * $http({ method: "post", url: "api/listings/delete/"+listing._id
-		 * }).success(function(data){ $scope.getListing(); });
-		 */
+		$http({
+			method : "delete",
+			url : "/api/deleteTask/" + theme.id
+		}).success(function(data) {
+			$scope.backlog.splice($scope.backlog.indexOf(theme), 1);
+		});
 	};
 
-	$scope.deleteStory = function(story) {
-		$scope.backlog.theme.splice($scope.backlog.theme.indexOf(theme), 1);
-		/*
-		 * $http({ method: "post", url: "api/listings/delete/"+listing._id
-		 * }).success(function(data){ $scope.getListing(); });
-		 */
+	$scope.deleteStory = function(story,index) {
+		$scope.backlog[index].theme.splice($scope.backlog[index].theme.indexOf(story), 1);
+		//$scope.backlog[i].theme.push(selectedItem);
+		var o = {
+				object : {
+					theme : $scope.backlog[index].theme,
+					name : $scope.backlog[index].name
+				}
+			};
+			$http.put("/api/updateTask/" + $scope.backlog[index].id, o).success(
+					function(data) {
+						//$scope.backlog[index].theme.splice($scope.backlog.indexOf(story), 1);
+					});
 	};
 
 	$scope.totalStories = [];
-	$scope.openCreateStory = function(i,ci) {
+	$scope.openCreateStory = function(i) {
 		console.log($scope.backlog[i]);
-		console.log("index:" + i +" child index :"+ ci);
+		//console.log("index:" + i +" child index :"+ ci);
 		var modalInstance = $modal.open({
 
 			templateUrl : 'views/modals/storyModal.html',
@@ -128,7 +136,7 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 		});
 
 		modalInstance.result.then(function(selectedItem) {
-			console.log($scope.backlog[i].theme);
+//			console.log($scope.backlog[i].theme);
 			if ($scope.backlog[i].theme == undefined)
 				$scope.backlog[i].theme = [];
 			if($scope.backlog[i].name.length>=3)
@@ -155,9 +163,9 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 
 	};
 
-	$scope.openEditStory = function(i,ci) {
+	$scope.openEditStory = function(i) {
 		console.log($scope.backlog[i]);
-		console.log("index:" + i +" child index :"+ ci);
+		//console.log("index:" + i +" child index :"+ ci);
 		var modalInstance = $modal.open({
 
 			templateUrl : 'views/modals/storyModal.html',
@@ -231,13 +239,21 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 		});
 
 	};
+	$scope.active = 'backlog';
+	$scope.switchSprint = function(sprint){
+		console.log(sprint);
+		$scope.active = sprint.sprintid;
+	};
 
 });
 
-cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance) {
+cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance, $http) {
 
 	$scope.createSprint = function() {
-
+		console.log($scope.sprint);
+		$http.post('/addProject/sprint', {object: $scope.sprint}).success(function(data){
+			
+		});
 	};
 
 	$scope.cancel = function() {

@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var session=require('express-session');
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 var app = express();
 
