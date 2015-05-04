@@ -68,17 +68,17 @@
 			</div>
 
 			<div data-ng-if="arr.subtask=='Yes'">
-				<div class="col-xs-2" style="text-align: center;padding-top: 10px;">
+				<div class="col-xs-2" style="text-align: center;padding-top: 10px;border-right: 2px solid #CCC;">
 					<a title="Delete listing" style="color: #000;" data-ng-click="deleteTask(arr)" class="pointer">&#10006;</a>
 					<b>Subtask: </b>{{arr.task}}
 				</div>
-				<div class="col-xs-1" style="text-align: center;padding-top: 10px">
+				<div class="col-xs-1" style="text-align: center;padding-top: 10px;border-right: 2px solid #CCC;">
 					{{arr.date}}
 				</div>
-				<div class="col-xs-1" style="text-align: center;padding-top: 10px">
+				<div class="col-xs-1" style="text-align: center;padding-top: 10px;border-right: 2px solid #CCC;">
 					{{arr.duration}}
 				</div>
-				<div class="col-xs-1" style="text-align: center;padding-top: 10px;">
+				<div class="col-xs-1" style="text-align: center;padding-top: 10px;border-right: 2px solid #CCC;">
 					<button class="btn btn-primary btn-xs"
 					style="width: 1; height: 1;" data-ng-click="openResource()">
 						<span class="fa fa-plus" aria-expanded="false">Resources</span>
