@@ -274,6 +274,39 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 		console.log(sprint);
 		$scope.active = sprint.sprintid;
 	};
+	
+	$scope.showStats = function(){
+		console.log($scope.sprints);
+		var rows = [];
+		angular.forEach($scope.sprints, function(v, i){
+			console.log(v);
+			var val = {
+					c : [
+					     {v : v.sprintid},
+					     {v : v.sprint_details.velocity}
+					     ]
+			};
+			rows.push(val);
+		});
+		$scope.active = 'stats';
+		$scope.chartObject = {};
+		$scope.onions = [
+		                 {v: "Onions"},
+		                 {v: 3},
+		             ];
+
+		             $scope.chartObject.data = {"cols": [
+		                 {id: "s", label: "Sprints", type: "string"},
+		                 {id: "v", label: "Velocity", type: "number"}
+		             ], "rows": rows};
+
+
+		             // $routeParams.chartType == BarChart or PieChart or ColumnChart...
+		             $scope.chartObject.type = "ColumnChart";
+		             $scope.chartObject.options = {
+		                 'title': 'Velocity of all Sprints'
+		             }
+	};
 });
 
 cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance, $http) {

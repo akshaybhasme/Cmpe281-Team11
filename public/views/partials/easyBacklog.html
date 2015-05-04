@@ -9,14 +9,17 @@
 			data-example-id="togglable-tabs">
 			<ul id="myTab" class="nav nav-tabs" role="tablist">
 				<li>
-					<button class="btn-sm" ng-click="open()">
+					<a class="pointer" ng-click="open()">
 						<i class="fa fa-plus" aria-expanded="false"></i>
-					</button>
+					</a>
 				</li>
-				<li role="presentation" data-ng-click="active = 'backlog'"><a>
+				<li role="presentation" data-ng-click="active = 'backlog'"><a class="pointer">
 						<b style="color: #000000;">Backlog</b>
 				</a></li>
-				<li ng-repeat="sprint in sprints track by $index"><a
+				<li>
+					<a class="pointer" data-ng-click="showStats()"><b>Stats</b></a>
+				</li>
+				<li ng-repeat="sprint in sprints track by $index"><a class="pointer"
 					style="color: #000000;" data-ng-click="switchSprint(sprint)">
 						{{sprint.sprintid}} </a></li>
 			</ul>
@@ -196,4 +199,7 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div data-ng-if="active == 'stats'" style="min-height: 500px">
+	<div data-google-chart data-chart="chartObject" style="{{cssStyle}}"></div>
 </div>
