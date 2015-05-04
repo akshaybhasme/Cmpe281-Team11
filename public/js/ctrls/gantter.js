@@ -48,8 +48,54 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
 			url : "/api/deleteTask/" + listing.id
 		}).success(function(data) {
 			$scope.arrs.splice($scope.arrs.indexOf(listing), 1);
-		});
+			function dateDiffInDays(a,b){
+				var Date1 = a;
+				var Date2= b;
 
+				var timestamp1 = new Date(Date1).getTime();
+				var timestamp2 = new Date(Date2).getTime();
+
+				var diff = (Math.abs(timestamp1 - timestamp2) / 3600000)/24;
+				return Math.ceil(diff);
+			}
+
+			function max(a,b){
+				return a>b?a:b;
+			}
+
+			var startdate;
+			console.log("Arrrrrrrrrrrrrrrrrrrrrrrraaaaaaaaaaayy"+$scope.arrs.length);
+			for(var i=0;i<$scope.arrs.length;i++){
+				if($scope.arrs[i].subtask=="No" && $scope.arrs[i].task==listing.maintask)
+				{
+					$scope.taskindex=i;
+					add=0;
+					startdate=$scope.arrs[i].date;
+
+				}
+
+				if($scope.arrs[i].subtask=="Yes" && $scope.arrs[i].maintask==listing.maintask)
+				{  
+					var enddate=$scope.arrs[i].date;
+					var diff=dateDiffInDays(enddate,startdate);
+					add=max(diff+parseInt($scope.arrs[i].duration),add);
+					if(parseInt($scope.arrs[$scope.taskindex].duration)>add){
+						$scope.arrs[$scope.taskindex].duration=add;
+					}
+
+				}
+
+				var o1 = {
+						object : $scope.arrs[$scope.taskindex]
+				};
+				$http.put("/api/updateTask/" + $scope.arrs[$scope.taskindex].id, o1)
+				.success(function(data)  {
+					console.log('Saved :' + data);
+				});
+				
+			}
+		});
+		//$scope.getListing();
 	};
 
 	$scope.getListing();
@@ -127,6 +173,8 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
 				selectedItem.id = data._id;
 				console.log(selectedItem);
 				$scope.arrs.push(selectedItem);
+				
+				//calculateDuration(selectedItem);
 
 				if(selectedItem.subtask=="Yes"){
 					$scope.checkdatediff=[];
@@ -153,14 +201,6 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
 							$scope.taskindex=i;
 							add=0;
 							startdate=$scope.arrs[i].date;
-							/*console.log($scope.arrs[$scope.taskindex]);
-                    var o1 = {
-                        object : $scope.arrs[$scope.taskindex]
-                      };
-                    $http.put("/api/updateTask/" + $scope.arrs[$scope.taskindex].id, o1)
-                    .success(function(data)  {
-                      console.log('Saved :' + data);
-                    });*/
 
 						}
 
@@ -171,13 +211,6 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
 							add=max(diff+parseInt($scope.arrs[i].duration),add);
 							if(parseInt($scope.arrs[$scope.taskindex].duration)<add){
 								$scope.arrs[$scope.taskindex].duration=add;
-								/*var o1 = {
-                        object : $scope.arrs[$scope.taskindex]
-                      };
-                    $http.put("/api/updateTask/" + $scope.arrs[$scope.taskindex].id, o1)
-                    .success(function(data)  {
-                      console.log('Saved :' + data);
-                    });*/
 							}
 
 						}
@@ -189,10 +222,6 @@ cmpe.controller('gantterCtrl', function ($scope, $modal, $log, $http, $statePara
 						.success(function(data)  {
 							console.log('Saved :' + data.duration);
 						});
-						
-						
-						
-						
 						
 					}
 					console.log($scope.totalduration);
