@@ -234,10 +234,13 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 
 });
 
-cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance) {
+cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance, $http) {
 
 	$scope.createSprint = function() {
-
+		console.log($scope.sprint);
+		$http.post('/addProject/sprint', {object: $scope.sprint}).success(function(data){
+			
+		});
 	};
 
 	$scope.cancel = function() {

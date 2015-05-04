@@ -33,38 +33,44 @@
 		<input ng-model="backlog.theme.userstoryln3" type="text"
 			name="txtSoICan"></input>
 	</div>
+	</br> </br> </br> </br>
+	<div class="col-xs-4">Acceptance Criteria:</div>
+	<div class="col-xs-8">
+		<textarea ng-model="backlog.theme.criteria" rows="3" cols="40"
+			name="textareaComments" style="border: thin; border-style: solid;"></textarea>
+		</br> </br>
+	</div>
+	<div class="col-xs-4">Comments:</div>
+	<div class="col-xs-8">
+		<textarea ng-model="backlog.theme.comments" rows="3" cols="40"
+			name="textareaComments" style="border: thin; border-style: solid;"></textarea>
+		</br> </br>
+	</div>
 	</br> </br>
-</div>
-</br>
-</br>
-<div class="col-xs-4">Acceptance Criteria:</div>
-<div class="col-xs-8">
-	<textarea ng-model="backlog.theme.criteria" rows="3" cols="40"
-		name="textareaComments" style="border: thin; border-style: solid;"></textarea> </br> </br>
-</div>
-<div class="col-xs-4">Comments:</div>
-<div class="col-xs-8">
-	<textarea ng-model="backlog.theme.comments" rows="3" cols="40"
-		name="textareaComments" style="border: thin; border-style: solid;"></textarea>
+	<div class="col-xs-4">Points</div>
+	<div class="col-xs-8">
+		<input ng-model="backlog.theme.points" type="text" name="txtPoints"></input>
+	</div>
+	<div class="col-xs-4">Cost</div>
+	<div class="col-xs-8">
+		<input ng-model="backlog.theme.cost" type="text" name="txtCost"></input>
+	</div>
+	<div class="col-xs-4">Days</div>
+	<div class="col-xs-8">
+		<input ng-model="backlog.theme.days" type="text" name="txtDays"></input>
+	</div>
 	</br> </br>
+	<div class="col-xs-4">Sprint</div>
+	<div class="col-xs-8 btn-group" dropdown>
+		<select type="button" class="btn btn-default"
+			data-ng-model="backlog.theme.sprint" 
+			data-ng-options="items for items in sprintList">
+		</select>
+	</div>
 </div>
-</br>
-</br>
-<div class="col-xs-4">Points</div>
-<div class="col-xs-8">
-	<input ng-model="backlog.theme.points" type="text" name="txtPoints"></input>
-</div>
-<div class="col-xs-4">Cost</div>
-<div class="col-xs-8">
-	<input ng-model="backlog.theme.cost" type="text" name="txtCost"></input>
-</div>
-<div class="col-xs-4">Days</div>
-<div class="col-xs-8">
-	<input ng-model="backlog.theme.days" type="text" name="txtDays"></input>
-</div>
-</div>
+<br/>
+<br/>
 <div class="modal-footer">
 	<button class="btn btn-primary" ng-click="createStory()">Ok</button>
 	<button class="btn btn-danger" ng-click="cancelStory()">Cancel</button>
-</div>
 </div>

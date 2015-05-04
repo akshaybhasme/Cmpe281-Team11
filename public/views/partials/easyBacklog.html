@@ -72,12 +72,7 @@
 						{{item.id}}</br> <a class="col-xs-8" title="Delete story"
 							style="color: #000;" data-ng-click="deleteStory(item)"
 							class="pointer">&#10006;</a> <i class="fa fa-pencil-square" ng-click="openEditStory($index)"></i>
-						<div class="col-xs-12 btn-group" dropdown>
-							<select type="button" class="btn btn-default"
-								data-ng-model="item.sprint"
-								data-ng-options="items.sprintid for items in sprints">
-							</select>
-						</div>
+						<div class="col-xs-12">{{item.sprint}}</div>
 					</div>
 	
 					<div class="col-xs-3" style="text-align: left">
