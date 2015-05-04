@@ -1,28 +1,7 @@
 cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 		$timeout, $rootScope, $http) {
 
-	$scope.sprints = [ {
-		sprintid : 'Sprint 1',
-		sprint_details : [ {
-			start_date : '03/13/2015',
-			duration : 30,
-			velocity : 15
-		} ]
-	}, {
-		sprintid : 'Sprint 2',
-		sprint_details : [ {
-			start_date : '01/13/2015',
-			duration : 20,
-			velocity : 24
-		} ]
-	}, {
-		sprintid : 'Sprint 3',
-		sprint_details : [ {
-			start_date : '03/25/2015',
-			duration : 50,
-			velocity : 20
-		} ]
-	} ];
+	$scope.sprints = [];
 	$scope.backlog = [];
 	/*
 	 * $scope.backlog = [ { name : 'Home page', theme : [ { code : 'HOP', id :
@@ -57,7 +36,8 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 	 * cost : 2133, days : '2.7', status : 'Accepted', sprint : 'Sprint 3', drag :
 	 * true } ] } ];
 	 */
-
+	
+	
 	$scope.getTheme = function() {
 		$http.get('/api/getTasks/easyBacklog/' + $stateParams.projectID)
 				.success(function(data) {
@@ -71,24 +51,73 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 	};
 
 	$scope.getTheme();
+	
+	$scope.getSprints= function() {
+		return $http.get('/api/getProjectByID/' + $stateParams.projectID)
+		.success(function(data) {
+			console.log(data);
+			
+			for(var i in data.object.sprints){
+				console.log(data.object.sprints[i]);
+				$scope.sprints.push(data.object.sprints[i]);
+			}
+		});
+	},
+
+	$scope.getSprints();
 
 	$scope.title = "easyBacklog Project";
 
-	$scope.items = [];
+	$scope.sprints = [];
 	$scope.open = function() {
 		var modalInstance = $modal.open({
 
 			templateUrl : 'views/modals/easyBacklogModal.html',
 			controller : 'modaleasyBacklogCtrl',
 			resolve : {
-				items : function() {
-					return $scope.items;
+				sprints : function() {
+					return $scope.sprints;
 				}
 			}
 		});
 
 		modalInstance.result.then(function(selectedItem) {
-			$scope.sprint.push(selectedItem);
+			console.log(selectedItem);
+			console.log($stateParams.projectID);
+			
+			$http.get('/api/getProjectByID/' + $stateParams.projectID)
+			.success(function(data) {
+				console.log(data);
+				var o = {
+						object :data.object
+					};
+				var sid;
+				if(!o.object.sprints){
+					sid='Sprint 1';		
+					o.object.sprints= [{
+						sprint_details :selectedItem.sprint_details,
+						sprintid :sid
+					}];
+				}
+				else{
+					sid='Sprint '+(o.object.sprints.length+1);
+					o.object.sprints.push({
+						sprint_details :selectedItem.sprint_details,
+						sprintid :sid
+					});
+				}
+				
+				
+				console.log(o.object.sprints);
+				
+				$http.put("/api/updateProject/" + $stateParams.projectID, o).success(
+						function(data) {
+							console.log('Saved :' + data);
+							selectedItem.sprintid=sid;
+							$scope.sprints.push(selectedItem);
+						});
+			});
+			
 
 		}, function() {
 			$log.info('Modal dismissed at: ' + new Date());
@@ -96,6 +125,7 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 		});
 
 	};
+
 	$scope.deleteTheme = function(theme) {
 		$http({
 			method : "delete",
@@ -244,16 +274,13 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 		console.log(sprint);
 		$scope.active = sprint.sprintid;
 	};
-
 });
 
 cmpe.controller('modaleasyBacklogCtrl', function($scope, $modalInstance, $http) {
 
 	$scope.createSprint = function() {
-		console.log($scope.sprint);
-		$http.post('/addProject/sprint', {object: $scope.sprint}).success(function(data){
-			
-		});
+		console.log($scope.sprints);
+		$modalInstance.close($scope.sprints);
 	};
 
 	$scope.cancel = function() {
@@ -272,8 +299,23 @@ cmpe.controller('modalThemeCtrl', function($scope, $modalInstance) {
 	};
 });
 
-cmpe.controller('modalStoryCtrl', function($scope, $modalInstance, theme) {
+cmpe.controller('modalStoryCtrl', function($scope, $modalInstance, $http, $stateParams, theme) {
+	
+	$scope.sprintList=[];
+	$scope.getSprints= function() {
+		return $http.get('/api/getProjectByID/' + $stateParams.projectID)
+		.success(function(data) {
+			console.log(data);
+			
+			for(var i in data.object.sprints){
+				console.log(data.object.sprints[i]);
+				$scope.sprintList.push(data.object.sprints[i].sprintid);
+			}
+		});
+	},
 
+	$scope.getSprints();
+	
 	$scope.createStory = function() {
 
 		console.log($scope.backlog);
@@ -282,7 +324,7 @@ cmpe.controller('modalStoryCtrl', function($scope, $modalInstance, theme) {
 		var obj = $scope.backlog.theme;
 		obj.drag = true;
 		obj.status = 'Accepted';
-		obj.sprint = 'Sprint 2';
+		//obj.sprint = 'Sprint 2';
 		//obj.code = 'hops';
 		$modalInstance.close(obj);
 	};
