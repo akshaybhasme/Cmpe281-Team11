@@ -46,7 +46,6 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 						v.object.id = v._id;
 						$scope.backlog.push(v.object);
 					});
-					console.log($scope.backlog);
 				});
 	};
 
@@ -55,10 +54,8 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 	$scope.getSprints= function() {
 		return $http.get('/api/getProjectByID/' + $stateParams.projectID)
 		.success(function(data) {
-			console.log(data);
 			
 			for(var i in data.object.sprints){
-				console.log(data.object.sprints[i]);
 				$scope.sprints.push(data.object.sprints[i]);
 			}
 		});
@@ -276,36 +273,36 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 	};
 	
 	$scope.showStats = function(){
-		console.log($scope.sprints);
 		var rows = [];
 		angular.forEach($scope.sprints, function(v, i){
-			console.log(v);
+			var sprintV = 0;
+			angular.forEach($scope.backlog, function(v1, i1){
+				angular.forEach(v1.theme, function(v2, i2){
+					if(v2.sprint == v.sprintid){
+						sprintV += parseInt(v2.cost);
+					}
+				});
+			});
 			var val = {
 					c : [
 					     {v : v.sprintid},
-					     {v : v.sprint_details.velocity}
+					     {v : sprintV}
 					     ]
 			};
 			rows.push(val);
 		});
 		$scope.active = 'stats';
 		$scope.chartObject = {};
-		$scope.onions = [
-		                 {v: "Onions"},
-		                 {v: 3},
-		             ];
 
-		             $scope.chartObject.data = {"cols": [
-		                 {id: "s", label: "Sprints", type: "string"},
-		                 {id: "v", label: "Velocity", type: "number"}
-		             ], "rows": rows};
+		$scope.chartObject.data = {"cols": [
+		                                    {id: "s", label: "Sprints", type: "string"},
+		                                    {id: "v", label: "Velocity", type: "number"}
+		                                    ], "rows": rows};
 
-
-		             // $routeParams.chartType == BarChart or PieChart or ColumnChart...
-		             $scope.chartObject.type = "ColumnChart";
-		             $scope.chartObject.options = {
-		                 'title': 'Velocity of all Sprints'
-		             }
+		$scope.chartObject.type = "ColumnChart";
+		$scope.chartObject.options = {
+				'title': 'Velocity of all Sprints'
+		}
 	};
 });
 
