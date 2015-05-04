@@ -231,6 +231,11 @@ cmpe.controller('easybacklogCtrl', function($scope, $stateParams, $log, $modal,
 		});
 
 	};
+	$scope.active = 'backlog';
+	$scope.switchSprint = function(sprint){
+		console.log(sprint);
+		$scope.active = sprint.sprintid;
+	};
 
 });
 

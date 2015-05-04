@@ -8,23 +8,27 @@
 		<div class="bs-example bs-example-tabs" role="tabpanel"
 			data-example-id="togglable-tabs">
 			<ul id="myTab" class="nav nav-tabs" role="tablist">
-				<li><button class="btn-sm" ng-click="open()">
+				<li>
+					<button class="btn-sm" ng-click="open()">
 						<i class="fa fa-plus" aria-expanded="false"></i>
-					</button></li>
-				<li role="presentation" class="active"><a id="backlog-tab"
-					role="tab" data-toggle="tab" aria-controls="backlog"
-					aria-expanded="true"><b style="color: #000000;">Backlog</b></a></li>
-				<li role="presentation" class="" ng-repeat="sprint in sprints "><a
-					role="tab" id="sprint-tab" data-toggle="tab" aria-controls="sprint"
-					aria-expanded="false" style="color: #000000;">{{sprint.sprintid}}</a></li>
+					</button>
+				</li>
+				<li role="presentation" data-ng-click="active = 'backlog'">
+					<a>
+						<b style="color: #000000;">Backlog</b>
+					</a>
+				</li>
+				<li ng-repeat="sprint in sprints track by $index">
+					<a style="color: #000000;" data-ng-click="switchSprint(sprint)">
+						{{sprint.sprintid}}
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>
 </div>
 <div class="separator"></div>
-<div id="myTabContent" class="tab-content">
-	<div role="tabpanel" class="tab-pane fade active in" id="backlog"
-		aria-labelledby="backlog-tab">
+<div data-ng-if="active == 'backlog'">
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="col-xs-1 label-default">
@@ -129,5 +133,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+
+<div data-ng-repeat="sprint in sprints track by $index" data-ng-if="active == sprint.sprintid">
+	Sprint {{$index}}
 </div>
