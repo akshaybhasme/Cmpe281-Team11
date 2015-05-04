@@ -2,9 +2,7 @@ cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal,
 		$timeout, $rootScope, $http) {
 
 	$scope.list1 = [];
-
 	$scope.list2 = [];
-
 	$scope.list3 = [];
 
 	$scope.title = "KANBAN Project";
@@ -27,10 +25,6 @@ cmpe.controller('kanbanCtrl', function($scope, $stateParams, $log, $modal,
 
 				});
 	};
-
-	$scope.dropSuccessHandler = function($event, $index, list) {
-		console.log(list);
-	}
 
 	$scope.updateListing1 = function($event, $index, list) {
 		list[$index].status="Requested";
